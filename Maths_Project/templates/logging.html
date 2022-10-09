@@ -1,0 +1,120 @@
+﻿{% extends "base.html" %} {% block title %}Logs{% endblock %} {% block content
+%}
+<h1 class="logs">Logs Biology</h1>
+<p>Enter your level of confidance with each of these topics to be recomended topics to learn and keep to track of what you have learnt and what you need to learn.</p>
+
+<head>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/anuraghazra/VerlyRangeSlider@v1.0.2/src/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/anuraghazra/Verly.js@v1.1.4/dist/verly.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/anuraghazra/VerlyRangeSlider@v1.0.2/src/VerlyRange.js"></script>
+    <link rel="stylesheet" href="static/styles.css " />
+
+    <style> 
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0 20px;
+        }
+
+        body, html {
+            font-family: 'Francois One', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #f55693
+        }
+
+        .wrapper {
+            margin: 50px auto;
+            max-width: 980px;
+        }
+
+        section.all-sliders {
+            width: 100%;
+            float: left;
+        }
+    </style>
+
+</head>
+<body>
+    <main class="wrapper">
+
+        <form class="all-sliders" method="post">
+            
+            <label class="slidecontainer third">
+                <p class="topictitle">Topic 1</p>
+                <span>Lipid</span>
+                <output class="numoutput" id="range">100</output>
+                <input class="slider" name="lipids" id="lipids" type="range" min="1" step="1" max="100" value="100" onchange=" range.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third">
+                <span>Protein</span>
+                <output id="rangeprotein">100</output>
+                <input class="slider" name="protein" id="protein" type="range" min="1" step="1" max="100" value="100" onchange=" rangeprotein.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third">
+                <span>water</span>
+                <output id="rangewater">100</output>
+                <input class="slider" name="water" id="water" type="range" min="1" step="1" max="100" value="100" onchange=" rangewater.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third ">
+                <span>atp</span>
+                <output id="rangeatp">100</output>
+                <input class="slider" name="atp" id="atp" type="range" min="1" step="1" max="100" value="100" onchange=" rangeatp.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third ">
+                <span>Carbohydrates</span>
+                <output id="rangecarbohydrates">100</output>
+                <input class="slider" name="Carbohydrates" id="Carbohydrates" type="range" min="1" step="1" max="100" value="100" onchange=" rangecarbohydrates.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third ">
+                <span>DNA</span>
+                <output id="rangedna">100</output>
+                <input class="slider" name="DNA" id="dna" type="range" min="1" step="1" max="100" value="100" onchange=" rangedna.value = value">
+                <div id="demo"></div>
+            </label>
+            
+            
+            <label class="slidecontainer third ">
+                <p class="topictitle"   >Topic 2</p>
+                <span>Cell Structure</span>
+                <output id="rangecellstructure">100</output>
+                <input class="slider" name="Cell Structure" id="Cellstructure" type="range" min="1" step="1" max="100" value="100" onchange=" rangecellstructure.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third ">
+                <span>Transport Across Cell Membrane</span>
+                <output id="rangetransportacrossmembrane">100</output>
+                <input class="slider" name="Transport Across Cell Membrane" id="transportacrossmembrane" type="range" min="1" step="1" max="100" value="100" onchange=" rangetransportacrossmembrane.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third ">
+                <span>Cell Cycle</span>
+                <output id="rangecellcycle">100</output>
+                <input class="slider" name="Cell Cycle" id="cellcycle" type="range" min="1" step="1" max="100" value="100" onchange=" rangecellcycle.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third ">
+                <span>Immune System</span>
+                <output id="rangeimmunesystem">100</output>
+                <input class="slider" name="Immune system" id="immunesystem" type="range" min="1" step="1" max="100" value="100" onchange=" rangeimmunesystem.value = value">
+                <div id="demo"></div>
+            </label>
+
+
+            <button type="submit" class="btn btn-outline-success">Success</button>
+        </form>
+    </main>
+
+</body>
+
+    {% endblock %}
+

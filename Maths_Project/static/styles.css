@@ -1,0 +1,49 @@
+body {
+    background-color: #EFE7CA;
+}
+
+.logs {
+    padding-top: 20px;
+    color: #14bd3e;
+}
+
+
+.card-title {
+    color: black;
+}
+
+.colourofbutton {
+    color: #B4E197;
+}
+
+.bg-light {
+    background-color: green;
+}
+.topictitle{
+    font-size:20px;
+}
+.navbar-light .navbar-brand {
+    color: #B4E197;
+}
+
+.card {
+    background-color: #B4E197;
+    margin: 20px;
+}
+
+.card-body {
+    background-color: #EFE7CA;
+    margin:10px;
+}
+
+
+.hometitle {
+    color: black;
+    padding-top: 30px;
+    font-family: 'Francois One', sans-serif;
+}
+
+.name {
+    font-size: 0.6em;
+    font-family: 'Francois One', sans-serif;
+}

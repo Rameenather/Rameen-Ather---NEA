@@ -1,0 +1,79 @@
+{% extends "base.html" %} {% block title %}Teacher Home{% endblock %} {% block content
+%}
+<link rel="stylesheet" href="static/styles.css" />
+<div>
+    <h1 class="hometitle">Welcome teacher, <span class="name">{{name}}</span></h1>
+    <p>{{quote}}</p>
+</div>
+
+
+
+
+<div>
+    <h1>IS THIS CORRECT?</h1>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Logs - Biology</h5>
+                <p class="card-text">Log your confidance in each topic for Biology Alevel</p>
+                <a href="/logs" class="btn btn-light colourofbutton">Logs :)</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Logs - Maths</h5>
+                <p class="card-text">Log your confidance in each topic for Maths Alevel</p>
+                <a href="#" class="btn btn-light colourofbutton">Logs :)</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Help - Biology</h5>
+                <p class="card-text">Ask a teacher for help in biology</p>
+                <a href="/logs" class="btn btn-light colourofbutton">Help :)</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Help - Maths</h5>
+                <p class="card-text">Ask a teacher for help in maths</p>
+                <a href="#" class="btn btn-light colourofbutton">Help :)</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Quiz - Biology</h5>
+                <p class="card-text">Do a biology quiz :P</p>
+                <a href="/logs" class="btn btn-light colourofbutton">Quiz :)</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Quiz - Maths</h5>
+                <p class="card-text">Do a maths quiz :P</p>
+                <a href="#" class="btn btn-light colourofbutton">Quiz :)</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+    {% endblock %}
+
+
