@@ -3,7 +3,8 @@ from models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from __init__ import db
 from flask_login import login_user, login_required, logout_user, current_user
-from student import account 
+import student
+from student import account
 
 
 auth = Blueprint('auth', __name__)
@@ -87,9 +88,10 @@ def sign_up():
             user = User.query.filter_by(email=email).first()
             id = user.id
             if user.status == "student":
-                account.student(id)
+                d = str(id)
+                id = account.student(int(id))
             elif user.status == "teacher":
-                account.teacher(id)
-
-
+                id = str(id)
+                id = account.teacher(int(id))
+            id.test()
     return render_template("sign_up.html", user=current_user)

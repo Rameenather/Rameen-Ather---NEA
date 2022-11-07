@@ -57,6 +57,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="questions\Bio.PNG" />
+    <Content Include="image_stuff.jpg" />
     <Content Include="questions\Lipid-1-ans.PNG" />
     <Content Include="questions\Lipid-1.PNG" />
     <Content Include="quotes.txt">
@@ -72,6 +73,12 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="templates\base.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\help_bio.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\help_maths.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="templates\home.html">

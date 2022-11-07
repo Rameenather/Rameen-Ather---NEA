@@ -1,0 +1,138 @@
+{% extends "base.html" %} {% block title %}Logs{% endblock %} {% block content
+%}
+<h1 class="logs">Logs Biology</h1>
+<p>Enter your level of confidance with each of these topics to be recomended topics to learn and keep to track of what you have learnt and what you need to learn.</p>
+
+<head>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/anuraghazra/VerlyRangeSlider@v1.0.2/src/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/anuraghazra/Verly.js@v1.1.4/dist/verly.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/anuraghazra/VerlyRangeSlider@v1.0.2/src/VerlyRange.js"></script>
+    <link rel="stylesheet" href="static/styles.css " />
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0 20px;
+        }
+
+        body, html {
+            font-family: 'Francois One', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #f55693
+        }
+
+        .wrapper {
+            margin: 50px auto;
+            max-width: 980px;
+        }
+
+        section.all-sliders {
+            width: 100%;
+            float: left;
+        }
+    </style>
+
+</head>
+<body>
+    <main class="wrapper">
+
+        <form class="all-sliders" method="post">
+
+            <label class="slidecontainer third">
+                <p class="topictitle">Topic 1</p>
+                <span>Algebraic methods</span>
+                <output class="numoutput" id="range">100</output>
+                <input class="slider" name="Algebraic methods" id="Algebraic methods" type="range" min="1" step="1" max="100" value="100" onchange=" range.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third">
+                <span>Functions and graphs</span>
+                <output id="rangeprotein">100</output>
+                <input class="slider" name="Functions and graphs" id="Functions and graphs" type="range" min="1" step="1" max="100" value="100" onchange=" rangeprotein.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third">
+                <span>water</span>
+                <output id="rangewater">100</output>
+                <input class="slider" name="water" id="water" type="range" min="1" step="1" max="100" value="100" onchange=" rangewater.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third ">
+                <span>squences and series</span>
+                <output id="rangeatp">100</output>
+                <input class="slider" name="squences and series" id="squences and series" type="range" min="1" step="1" max="100" value="100" onchange=" rangeatp.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third ">
+                <span>Bionomial expansion</span>
+                <output id="rangecarbohydrates">100</output>
+                <input class="slider" name="Bionomial expansion" id="Bionomial expansion" type="range" min="1" step="1" max="100" value="100" onchange=" rangecarbohydrates.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third ">
+                <span>Radians</span>
+                <output id="rangedna">100</output>
+                <input class="slider" name="Radians" id="Radians" type="range" min="1" step="1" max="100" value="100" onchange=" rangedna.value = value">
+                <div id="demo"></div>
+            </label>
+
+            <label class="slidecontainer third ">
+                <p class="topictitle">Topic 2</p>
+                <span>Trigonometric functions</span>
+                <output id="rangecellstructure">100</output>
+                <input class="slider" name="Trigonometric functions" id="Trigonometric functions" type="range" min="1" step="1" max="100" value="100" onchange=" rangecellstructure.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third ">
+                <span>Trigonometry and modelling</span>
+                <output id="rangetransportacrossmembrane">100</output>
+                <input class="slider" name="Trigonometry and modelling" id="Trigonometry and modelling" type="range" min="1" step="1" max="100" value="100" onchange=" rangetransportacrossmembrane.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third ">
+                <span>Parametric equations</span>
+                <output id="rangecellcycle">100</output>
+                <input class="slider" name="Parametric equations" id="Parametric equations" type="range" min="1" step="1" max="100" value="100" onchange=" rangecellcycle.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third ">
+                <span>Differentiation</span>
+                <output id="rangeimmunesystem">100</output>
+                <input class="slider" name="Differentiation" id="Differentiation" type="range" min="1" step="1" max="100" value="100" onchange=" rangeimmunesystem.value = value">
+                <div id="demo"></div>
+            </label>
+
+            <label class="slidecontainer third ">
+                <span>Numerical methods</span>
+                <output id="rangenumerical">100</output>
+                <input class="slider" name="Numerical methods" id="Numerical methods" type="range" min="1" step="1" max="100" value="100" onchange=" rangenumerical.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third ">
+                <span>integration</span>
+                <output id="rangeintegration">100</output>
+                <input class="slider" name="integration" id="integration" type="range" min="1" step="1" max="100" value="100" onchange=" rangeintegration.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third ">
+                <span>vectors</span>
+                <output id="rangevectors">100</output>
+                <input class="slider" name="vectors" id="vectors" type="range" min="1" step="1" max="100" value="100" onchange=" rangevectors.value = value">
+                <div id="demo"></div>
+            </label>
+
+
+            <button type="submit" class="btn btn-outline-success">Success</button>
+        </form>
+    </main>
+
+</body>
+
+    {% endblock %}
+

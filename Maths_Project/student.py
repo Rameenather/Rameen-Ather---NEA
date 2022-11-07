@@ -6,6 +6,10 @@ class account:
     def __init__(self,id):
         self.id = id
         
+    def test(self):
+        print(self.id)
+        print("hello test :P")
+
 class student(account):
     #student account
     def __init__(self,id):        
@@ -15,6 +19,10 @@ class student(account):
 
     def questions(self):
         pass
+
+    def test(self):
+        print(self.id)
+        print("hello test :P")
 
     def report(self):
         pass

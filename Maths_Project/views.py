@@ -11,9 +11,11 @@ views = Blueprint('views', __name__)
 from database_attempt import getforms
 
 
-@views.route('/')
+@views.route('/', methods=['GET', 'POST'])
 def main_page():
-
+    if request.method == "POST":
+        button1 = request.getParameter("button1");
+        print(button1)
     return render_template("main_page.html", user=current_user)
 
 @views.route('/TEACHERhome', methods=['GET', 'POST'])
@@ -47,6 +49,34 @@ def logs():
     getforms()
         
     return render_template('logging.html', user=current_user)
+
+@views.route('/logs_maths', methods=['GET', 'POST'])
+@login_required
+def logs_maths():
+    
+        
+    return render_template('logging_maths.html', user=current_user)
+
+
+
+
+@views.route('/help_bio', methods=['GET', 'POST'])
+@login_required
+def help_bio():
+    
+        
+    return render_template('help_bio.html', user=current_user, name = current_user.first_name)
+
+
+@views.route('/help_maths', methods=['GET', 'POST'])
+@login_required
+def help_maths():
+    
+        
+    return render_template('help_maths.html', user=current_user, name = current_user.first_name)
+
+
+
 
 
 
