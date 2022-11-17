@@ -19,7 +19,7 @@ def getforms():
         cellcycle = request.form.get('cellcycle')
         immunesystem = request.form.get('immunesystem')
 
-
+        #will be stored in database :D this is temp
         topic = {
             'lipids':lipids,
             'protein':protein,

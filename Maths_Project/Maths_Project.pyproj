@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="questions\" />
+    <Folder Include="questions\biology\" />
     <Folder Include="static\" />
     <Folder Include="templates\" />
   </ItemGroup>
@@ -56,10 +57,19 @@
     <Content Include="extra.txt">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="questions\Bio.PNG" />
     <Content Include="image_stuff.jpg" />
-    <Content Include="questions\Lipid-1-ans.PNG" />
-    <Content Include="questions\Lipid-1.PNG" />
+    <Content Include="questions\biology\cellstructure-1-ans.png" />
+    <Content Include="questions\biology\cellstructure-1.png" />
+    <Content Include="questions\biology\celltransport-1-ans.png" />
+    <Content Include="questions\biology\celltransport-1.png" />
+    <Content Include="questions\biology\digestion&amp;absorption-1-ans.png" />
+    <Content Include="questions\biology\digestion&amp;absorption-1.png" />
+    <Content Include="questions\biology\digestion&amp;absorption-2-ans.png" />
+    <Content Include="questions\biology\digestion&amp;absorption-2.png" />
+    <Content Include="questions\biology\DNA-1-ans.png" />
+    <Content Include="questions\biology\DNA-1.png" />
+    <Content Include="questions\biology\lipid-1-ans.png" />
+    <Content Include="questions\biology\lipid-1.png" />
     <Content Include="quotes.txt">
       <SubType>Code</SubType>
     </Content>
@@ -94,6 +104,15 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="templates\main_page.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\questions.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\quiz_bio.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\quiz_maths.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="templates\sign_up.html">

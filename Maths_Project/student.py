@@ -1,41 +1,98 @@
 import sqlite3
 import database_attempt
+from flask import Blueprint, render_template, request, flash, jsonify
+from flask_login import login_required, current_user
+from __init__ import db
+import json
+from models import User
 
 
-class account:
-    def __init__(self,id):
-        self.id = id
-        
-    def test(self):
-        print(self.id)
-        print("hello test :P")
 
-class student(account):
+class student:
     #student account
-    def __init__(self,id):        
-        account.__init__(self,id)
-        self.id = id
-        self.logs = {}
-
-    def questions(self):
-        pass
-
     def test(self):
-        print(self.id)
         print("hello test :P")
 
-    def report(self):
+    def questions(self,topic):
+        """Selects questions with the topic wanted (might change)"""
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+        m = cursor.execute ("""
+        SELECT question, 
+        FROM questions,
+        WHERE topic = topic
+        """)
+        
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+        
+
+    def mark_scheme(self,topic):
+        """Selects answers with the topic wanted (might change)"""
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+        m = cursor.execute ("""
+        SELECT question 
+        FROM questions
+        WHERE topic = topic
+        """)
+        
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+    def enter_answers():
         pass
-    
-    def enter_answer_images():
-       pass
+
+    def send_answer_to_mark():
+        pass
+
+    def mark_received():
+        pass
 
     def send_email():
         pass
 
+    def help():
+        pass
 
-    def calculate_topic(self,logs):
-       """Calculating the best topic to study at the time """
+    def store_logs_database():
+        """Stores the logs entered to the database"""
+        if request.method == 'POST':
+            lipids = request.form.get('lipids')
+            protein = request.form.get('protein')
+            water = request.form.get('water')
+            atp = request.form.get('atp')
+            Carbohydrates = request.form.get('Carbohydrates')
+            dna = request.form.get('dna')
+            Cellstructure = request.form.get('Cellstructure')
+            transportacrossmembrane = request.form.get('transportacrossmembrane')
+            cellcycle = request.form.get('cellcycle')
+            immunesystem = request.form.get('immunesystem')
+
+        #will be stored in database :D this is temp
+        topic = {
+            'lipids':lipids,
+            'protein':protein,
+            'water':water,
+            'atp':atp,
+            'Carbohydrates':Carbohydrates,
+            'dna':dna,
+            'Cellstructure':Cellstructure,
+            'transportacrossmembrane':transportacrossmembrane,
+            'cellcycle':cellcycle,
+            'immunesystem':immunesystem,
+
+            }
+        print(topic)
+
+
+
+    def get_best_topic(self,logs):
+       """Calculating the best topic to study at the time might vhange """
        temp = 0
        optimal = None
        temp_list = []
@@ -66,18 +123,38 @@ class student(account):
        pass
 
 
-class teacher(account):
+class teacher():
     #Teacher account
-    def __init__(self,id,teacher_logs):
-        account.__init__(self,id)
-        self.tlogs = teacher_logs
-
-
 
     def teach(self):
         pass
 
-class examiner(account):
+    def log_teaching():
+        pass
+
+    def quick_fire_five():
+        pass
+
+    def questions():
+        pass
+
+    def mark_scheme():
+        pass
+    
+    def enter_answers():
+        pass
+
+    def send_answer_to_mark():
+        pass
+
+    def mark_recieved():
+        pass 
+
+    def add_points():
+        pass
+
+class examiner():
     #examiner account
-    def __init__(self,id):
-        account.__init__(self,id)
+
+    def mark():
+        pass

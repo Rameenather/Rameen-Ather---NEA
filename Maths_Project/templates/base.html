@@ -33,14 +33,19 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar" >
-            <div class="navbar-nav ml-auto" >
+            <div class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
-
+                {% if user.status == teacher %}
                 <a class="nav-item nav-link" id="home" href="/TEACHERhome">Home</a>
                 <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
                 {% else %}
+                <a class="nav-item nav-link" id="home" href="/STUDENThome">Home</a>
+                <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+                {% endif %}
+                {% else %}
                 <a class="nav-item nav-link" id="login" href="/login">Login</a>
                 <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+
                 {% endif %}
             </div>
         </div>

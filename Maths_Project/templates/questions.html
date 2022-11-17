@@ -1,0 +1,100 @@
+{% extends "base.html" %} {% block title %}Student Home{% endblock %} {% block content
+%}
+<link rel="stylesheet" href="static/styles.css" />
+<div>
+    <p>Answering question time :D. </p>
+    <p>These questions will be timed on how long you take, so make sure to not leave your device open with this page :D</p>
+    <p class="time" id="demo"></p>
+</div>
+<nav aria-label="...">
+    <ul class="pagination">
+        <li class="page-item disabled">
+            <span class="page-link">Previous</span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">2</span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</nav>
+
+<button type="submit" onclick='run = false'>hello</button> 
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+    var currentTime_s = 0;
+    var currentTime_m = 0;
+    var currentTime_h = 0;
+    var totalTime = 0
+    var run = true;
+    var time = "time";
+
+    function sendTime()
+    {
+        time_l = {
+            'time': totalTime
+
+        }
+        $.ajax({
+            url: '/questions',
+            type: 'POST',
+            data: { time_l },
+            success: function (data) {
+                window.alert("success")
+            }   
+        });
+    }
+
+    var x = setInterval(function () {
+        if (run == false) {
+            document.getElementById("test").innerHTML = "You took" + totalTime + "seconds";
+            sendTime()
+            return;
+        }
+        else {
+        
+        currentTime_s = currentTime_s + 1;
+        totalTime = totalTime + 1;
+
+        if (currentTime_s == 60) {
+            currentTime_m = currentTime_m + 1;
+            currentTime_s = 0
+            if (currentTime_m == 60) {
+                currentTime_h = currentTime_h + 1;
+                currentTime_m = 0
+            }
+        }
+
+        // Display the result in the element with id="demo"
+        document.getElementById("demo").innerHTML = currentTime_h + "h "
+            + currentTime_m + "m " + currentTime_s + "s ";
+
+
+        
+        
+
+        };
+    }, 1000);
+
+    
+
+
+    
+
+</script>
+    
+
+
+    <p id="test"></p>
+
+<!-- the images of the questions will go here -->
+    {% endblock %}
+

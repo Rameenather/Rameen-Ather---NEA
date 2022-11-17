@@ -75,10 +75,33 @@ def help_maths():
         
     return render_template('help_maths.html', user=current_user, name = current_user.first_name)
 
+@views.route('/quiz_maths', methods=['GET', 'POST'])
+@login_required
+def quiz_maths():
+    
+        
+    return render_template('quiz_maths.html', user=current_user, name = current_user.first_name)
 
 
+@views.route('/quiz_bio', methods=['GET', 'POST'])
+@login_required
+def quiz_biology():
+    
+        
+    return render_template('quiz_bio.html', user=current_user, name = current_user.first_name)
 
 
+@views.route('/questions', methods=['GET', 'POST'])
+@login_required
+def questions():
+    try:
+        print("Hello FUCKING WORK PLEASE ")
+        data = json.loads(request.data)
+        print(data)
+    except ValueError:
+        print('Unable to parse JSON data from request.')
+        
+    return render_template('questions.html', user=current_user)
 
 
 

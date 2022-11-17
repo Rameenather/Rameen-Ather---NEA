@@ -119,6 +119,22 @@ mycursor = mydb.cursor()
 
 #""")
 
+#writing the question into the database
+
+with open('questions/biology/DNA-1.PNG' , 'rb') as f:
+    question = f.read()
+
+with open('questions/biology/DNA-1-ans.PNG','rb') as a:
+    ans = a.read()
+
+topic = "dna"
+cursor.execute("""
+INSERT INTO questions (topic,question,answer,marks) VALUES (?,?,?,?)""",(topic,question,ans,8))
+
+
+
+
+
 
 mycursor.execute("DESCRIBE People")
 for x in mycursor:
@@ -126,7 +142,7 @@ for x in mycursor:
 
 
 
-
+#code for sending an email
 -sending an email- 
 import smtplib
 import random
@@ -137,9 +153,8 @@ my_email = "testingmycode1@outlook.com"
 password  = "Street4."
 send_email = "rameenather22@gmail.com"
 
-#---------------------------------------------------------------------------------------#
-def picking_subject():
-    pass 
+
+
 
 
 #initialize connection to our email server, we will use Outlook here
@@ -195,3 +210,16 @@ def send_an_email(my_email,password,send_email,text):
         <button type="submit" class="btn btn-dark">Submit</button>
     </form>
 </main>
+
+
+
+tables_biology = {
+         '1': ['Lipids', 'Carbohydrates','Proteins and Enzymes','DNA ', 'ATP', 'Water and Inorgranic ions'],
+         '2': ['Cell structure','Transport across cell membranes','Cell cycle','Immune system'],
+         '3': ['Gas Exchange','Digestion and Absorption','Mass Transport'],
+         '4': ['Protein Synthesis','Biodiversity ','Genetic Diversity '],
+         '5': ['Photosynthesis','Respiration','Nitrogen Cycle','Energy and ecosystem'],
+         '6': ['Homeostasis','Nervous coordination and muscles','Response to stimuli',],
+         '7': ['Populations in ecosystems','Inheritance and genetic crosses','Evolution and Speciation'],
+         '8': ['Gene Mutation','Stem cells','Genetic Fingerprinting ','Gene Expression and Cancer']
+          }

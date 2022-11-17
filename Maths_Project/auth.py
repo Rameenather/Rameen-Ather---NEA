@@ -3,8 +3,7 @@ from models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from __init__ import db
 from flask_login import login_user, login_required, logout_user, current_user
-import student
-from student import account
+from student import student, teacher
 
 
 auth = Blueprint('auth', __name__)
@@ -84,14 +83,11 @@ def sign_up():
             elif status == "student":
                 flash('Account created!', category='success')
                 return redirect(url_for('views.student_home'))
-            #creating class onject for account 
-            user = User.query.filter_by(email=email).first()
-            id = user.id
-            if user.status == "student":
-                d = str(id)
-                id = account.student(int(id))
-            elif user.status == "teacher":
-                id = str(id)
-                id = account.teacher(int(id))
-            id.test()
+
+
+            if status == "student":
+                stud = student()
+            elif status == "teacher":
+                teach = teacher()
+            stud.test()
     return render_template("sign_up.html", user=current_user)
