@@ -5,7 +5,7 @@ from flask_login import login_required, current_user
 from __init__ import db
 import json
 from models import User
-
+import datetime
 
 
 class student:
@@ -27,7 +27,7 @@ class student:
         conn.commit()
         cursor.close()
         conn.close()
-        
+        return m 
 
     def mark_scheme(self,topic):
         """Selects answers with the topic wanted (might change)"""
@@ -43,6 +43,7 @@ class student:
         conn.commit()
         cursor.close()
         conn.close()
+        return m
 
     def enter_answers():
         pass
@@ -61,6 +62,8 @@ class student:
 
     def store_logs_database():
         """Stores the logs entered to the database"""
+        user = User.query.filter_by(email=email).first()
+        current_date = date.today()
         if request.method == 'POST':
             lipids = request.form.get('lipids')
             protein = request.form.get('protein')
@@ -74,6 +77,7 @@ class student:
             immunesystem = request.form.get('immunesystem')
 
         #will be stored in database :D this is temp
+        
         topic = {
             'lipids':lipids,
             'protein':protein,
@@ -87,9 +91,15 @@ class student:
             'immunesystem':immunesystem,
 
             }
+        cursor.execute("""
+        INSERT INTO topic1 (account_id,date_entered,lipid,carbohydrates,protein_and_enzymes,DNA,ATP,Water_and_inorganic_ions) VALUES (?,?,?,?,?,?,?,?),"""
+        (user.id,current_date,lipids,Carbohydrates,protein,dna,atp,water))
         print(topic)
 
-
+        conn.commit()
+        cursor.close()
+        conn.close()
+        
 
     def get_best_topic(self,logs):
        """Calculating the best topic to study at the time might vhange """
