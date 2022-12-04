@@ -8,7 +8,7 @@ import random
 
 views = Blueprint('views', __name__)
 
-from database_attempt import getforms
+from database_attempt import *
 
 
 @views.route('/', methods=['GET', 'POST'])
@@ -85,8 +85,8 @@ def quiz_maths():
 
 @views.route('/quiz_bio', methods=['GET', 'POST'])
 @login_required
-def quiz_biology():
-    
+def quiz_biology():  
+    get_topic()
         
     return render_template('quiz_bio.html', user=current_user, name = current_user.first_name)
 
@@ -100,7 +100,6 @@ def questions():
         print(data)
     except ValueError:
         print('Unable to parse JSON data from request.')
-        
     return render_template('questions.html', user=current_user)
 
 

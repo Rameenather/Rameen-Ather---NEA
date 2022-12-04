@@ -223,3 +223,18 @@ tables_biology = {
          '7': ['Populations in ecosystems','Inheritance and genetic crosses','Evolution and Speciation'],
          '8': ['Gene Mutation','Stem cells','Genetic Fingerprinting ','Gene Expression and Cancer']
           }
+
+
+          m = cursor.fetchall()
+    type(result[0][0])
+#If the type is byte, use from io import BytesIOf. If str, use from io import StringIO.
+    file_like= BytesIO(result[0][0])
+    img=PIL.Image.open(file_like)
+    img.show()
+    with open("q1.png", "wb") as fh:
+        fh.write(base64.decodebytes(m))
+    print(type(m))
+    #image_2 = base64.decodebytes(m)
+    #w = open("q1.png", "w") 
+    #w.write(image_2)
+    #w.close()

@@ -58,6 +58,8 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="image_stuff.jpg" />
+    <Content Include="q1.jpg" />
+    <Content Include="q1.png" />
     <Content Include="questions\biology\cellstructure-1-ans.png" />
     <Content Include="questions\biology\cellstructure-1.png" />
     <Content Include="questions\biology\celltransport-1-ans.png" />

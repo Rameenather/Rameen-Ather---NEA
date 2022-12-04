@@ -22,7 +22,7 @@
     </ul>
 </nav>
 
-<button type="submit" onclick='run = false'>hello</button> 
+<button type="submit" onclick='run = false'>hello</button>
 
 
 
@@ -37,8 +37,7 @@
     var run = true;
     var time = "time";
 
-    function sendTime()
-    {
+    function sendTime() {
         time_l = {
             'time': totalTime
 
@@ -49,7 +48,7 @@
             data: { time_l },
             success: function (data) {
                 window.alert("success")
-            }   
+            }
         });
     }
 
@@ -60,40 +59,50 @@
             return;
         }
         else {
-        
-        currentTime_s = currentTime_s + 1;
-        totalTime = totalTime + 1;
 
-        if (currentTime_s == 60) {
-            currentTime_m = currentTime_m + 1;
-            currentTime_s = 0
-            if (currentTime_m == 60) {
-                currentTime_h = currentTime_h + 1;
-                currentTime_m = 0
+            currentTime_s = currentTime_s + 1;
+            totalTime = totalTime + 1;
+
+            if (currentTime_s == 60) {
+                currentTime_m = currentTime_m + 1;
+                currentTime_s = 0
+                if (currentTime_m == 60) {
+                    currentTime_h = currentTime_h + 1;
+                    currentTime_m = 0
+                }
             }
-        }
 
-        // Display the result in the element with id="demo"
-        document.getElementById("demo").innerHTML = currentTime_h + "h "
-            + currentTime_m + "m " + currentTime_s + "s ";
+            // Display the result in the element with id="demo"
+            document.getElementById("demo").innerHTML = currentTime_h + "h "
+                + currentTime_m + "m " + currentTime_s + "s ";
 
 
-        
-        
+
+
 
         };
     }, 1000);
 
-    
 
 
-    
+
+
 
 </script>
-    
 
+<p id="test"></p>
 
-    <p id="test"></p>
+<!-- the images of the questions will go here -->
+
+<picture>
+    <source srcset="q1.png" type="image/svg+xml">
+    <img src="..." class="img-fluid img-thumbnail" alt="...">
+</picture>
+
+<div>
+    <img src="q1.png" alt="question 1">
+</div>
+
 
 <!-- the images of the questions will go here -->
     {% endblock %}

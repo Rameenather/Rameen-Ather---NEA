@@ -39,9 +39,6 @@ def getforms():
         geneexpression = request.form.get('geneexpression')
         recombinantDNAtechnology = request.form.get('recombinantDNAtechnology')
 
-
-
-
         #will be stored in database :D this is temp
         topic = {
             'lipids':lipids,
@@ -112,11 +109,39 @@ def getforms():
         
 
 
+def get_questions(topic):
+    """Gets the question of the topic the user wants"""
 
+    import base64
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    m = cursor.execute (f"""
+        SELECT question, id, answer
+        FROM questions
+        WHERE topic = ?
+        """,[topic])
+    print(m)
 
+    for x in m:
+        rec_data = x[0]
 
+    with open('q1.jpg','wb') as f:
+        f.write(rec_data)
+    
 
+    conn.commit()
+    cursor.close()
+    conn.close()
+    
 
+def get_topic():
+    if request.method == 'POST':
+        topic = request.form.get('sclt2')
+        if topic == None:
+            pass
+        else:
+            get_questions(topic)
+        print(topic)
 
 
 

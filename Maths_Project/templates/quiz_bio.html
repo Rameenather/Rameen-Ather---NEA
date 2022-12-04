@@ -1,13 +1,104 @@
 {% extends "base.html" %} {% block title %}Student Home{% endblock %} {% block content
 %}
+
+<head>
+    <script type="text/javascript">
+        function populate(s1,s2) {
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+
+            if (s1.value == "1") {
+                var optionArray = ['|', "lipids|lipids", "carbohydrates|Carbohydrates", "protein_and_enzymes|proteins and enzymes", "DNA|dna", "ATP|atp", "Water_and_inorganic_ions|water"];
+            }
+            else if (s1.value == "2") {
+                var optionArray = ['|', "cell_structure|cell strucuture", "transport_across_membrane|transport across membrane", "protein_and_enzymes|proteins and enzymes", "cell_cycle|cell cycle", "immune_system|immune system"];
+            }
+            else if (s1.value == "3") {
+                var optionArray = ['|', "gas_exchange|gas exchange", "digestion_and_absorption|digestion and absorption", "mass_transport|mass transport"];
+            }
+            else if (s1.value == "4") {
+                var optionArray = ['|', "protein_synthesis|protein synthesis", "biodiversity|biodiversity", "genetic_diversity|genetic diversity"];
+            }
+            else if (s1.value == "5") {
+                var optionArray = ['|', "photosynthesis|photosynthesis", "respiration|respiration", "nitrogen_cycle|nitrogen cycle", "energy_and_ecosystem|energy and ecosystem"];
+            }
+            else if (s1.value == "6") {
+                var optionArray = ['|', "response_to_stimuli|response to stimuli", "nervous_coordination_and_muscles|nervous coordination and muscles", "homeostasis|homeostasis"];
+            }
+            else if (s1.value == "7") {
+                var optionArray = ['|', "inherited_change|inherited change", "population_and_evolution|population and evolution",  "population_in_ecosystems|population in ecosystems"];
+            }
+            else if (s1.value == "8") {
+                var optionArray = ['|', "gene_expression|gene expression", "recombinant_DNA_technology|recombinant DNA technology"];
+            }
+
+            for (var option in optionArray) {
+                var pair = optionArray[option].split("|");
+                var newOption = document.createElement("option");
+                newOption.value = pair[0];
+                newOption.innerHTML = pair[1];
+                s2.options.add(newOption);
+
+
+            }
+           
+        }
+
+
+    </script>
+</head>
 <link rel="stylesheet" href="static/styles.css" />
-<div>
-    <h1 class="hometitle">Welcome, <span class="name">{{name}}</span></h1>
-    <p>Answering question time :D</p>
-</div>
+<body>
+    <div>
+
+        <h1 class="hometitle">Welcome, <span class="name">{{name}}</span></h1>
+        <p>Answering question time :D</p>
+        <p>First you have to pick what topic questions do you want or do you want them from the all specification :D</p>
+    </div>
+    <hr />
+    <form>
+        choose topic:
+        <select id="slct1" name="slct1" onchange="populate(this.id,'slct2')">
+            <option value="">nothin</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
 
 
-<!-- the images of the questions will go here -->
+        </select>
+
+        <hr />
+        choose subtopic:
+        <select id="slct2" name="slct2">
+            <option value="">nothin</option>
+
+
+        </select>
+        <hr />
+        <button class="submit" href="/questions">question time</button>
+        <a class="btn btn-dark submit" href="/questions" role="button">Link</a>
+    </form>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     {% endblock %}
 

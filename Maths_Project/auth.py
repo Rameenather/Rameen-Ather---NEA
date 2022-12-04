@@ -24,10 +24,13 @@ def login():
                 
                 if sta == "teacher":
                     flash('Logged in successfully!', category='success')
+                    stud = student()
+                    stud.test()
                     login_user(user, remember=True)
                     return redirect(url_for('views.teacher_home'))
                 elif sta == "student":
                     flash('Logged in successfully!', category='success')
+                    teach = teacher()
                     login_user(user, remember=True)
                     return redirect(url_for('views.student_home'))
                         
@@ -79,15 +82,11 @@ def sign_up():
             login_user(new_user, remember=True)
             if status == "teacher":  
                 flash('Account created!', category='success')
+                tech = teacher()
                 return redirect(url_for('views.teacher_home'))
             elif status == "student":
                 flash('Account created!', category='success')
+                stud = student()
                 return redirect(url_for('views.student_home'))
 
-
-            if status == "student":
-                stud = student()
-            elif status == "teacher":
-                teach = teacher()
-            stud.test()
     return render_template("sign_up.html", user=current_user)
