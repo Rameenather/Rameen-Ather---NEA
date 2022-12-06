@@ -5,7 +5,8 @@ import json
 from models import User
 import random
 import sqlite3
-from datetime import date
+from datetime import date , datetime
+import smtplib
 
 
 def getforms():
@@ -144,6 +145,58 @@ def get_topic():
         print(topic)
 
 
+
+
+
+def send_email():
+    """Queries emails and sends an email to all the student 
+    acc with there topic as a reminder to revise"""
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    status = "student"
+    cursor.execute("""
+        SELECT email, first_name
+        FROM user
+        WHERE status = ?""",[status])
+
+    data = cursor.fetchall()
+
+    my_email = "testingmycode1@outlook.com"
+    password  = "Street4."
+    send_email = "rameenather22@gmail.com"
+
+    current_time = datetime.now()
+    if current_time.hour == 18:
+        for i in data:
+            send_an_email(my_email,password,i[0],"topic",i[1])
+
+    #Login email detail and sending email detail
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+
+
+#initialize connection to our email server, we will use Outlook here
+def send_an_email(my_email,password,send_email,topic, name):
+
+    """Sends an email"""
+
+    with smtplib.SMTP('smtp-mail.outlook.com', port='587') as smtp:
+        smtp.ehlo()  # send the extended hello to our server
+        smtp.starttls()  # tell server we want to communicate with TLS encryption
+        smtp.login(user = my_email, password = password)  # login to our email server
+        smtp.sendmail(from_addr = my_email,
+                      to_addrs = send_email,
+                      msg = f"""Subject:Email from maths/Biology revision \n\n {name} Hi its time to revise {topic} to make sure you get an A*""") #The email message. 
+    print("email success")
+
+    
+
+    
 
 
 

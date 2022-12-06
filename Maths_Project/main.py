@@ -2,6 +2,8 @@ from flask import Flask
 from __init__ import create_app
 import sqlite3
 from student import student
+from database_attempt import *
+
 
 #creating the app :P
 app = create_app()
@@ -127,7 +129,7 @@ tables_biology = {
 
 #cursor.execute("""INSERT INTO questions (topic, question, answer, marks) VALUES (?,?,?,?)""",(topic,question,ans,mark))
 
-
+send_email()
 
 
 
