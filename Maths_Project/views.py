@@ -104,3 +104,11 @@ def questions():
 
 
 
+@views.route('/call', methods=['GET', 'POST'])
+@login_required
+def call():
+
+
+    return render_template("call.html", user = current_user)
+
+

@@ -126,7 +126,7 @@ def get_questions(topic):
     for x in m:
         rec_data = x[0]
 
-    with open('q1.jpg','wb') as f:
+    with open('static/q1.png','wb') as f:
         f.write(rec_data)
     
 
@@ -196,10 +196,23 @@ def send_an_email(my_email,password,send_email,topic, name):
 
     
 
-    
+def get_teacher():
+    import random
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
 
+    status = "teacher"
+    cursor.execute("""
+        SELECT email, first_name
+        FROM user
+        WHERE status = ?""",[status])
 
+    teach = random.choose(cursor)
+    print(teach)
 
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 
 

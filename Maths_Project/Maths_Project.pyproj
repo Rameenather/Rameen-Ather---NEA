@@ -59,7 +59,10 @@
     </Content>
     <Content Include="image_stuff.jpg" />
     <Content Include="q1.jpg" />
-    <Content Include="q1.png" />
+    <Content Include="static\call.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="static\q1.png" />
     <Content Include="questions\biology\cellstructure-1-ans.png" />
     <Content Include="questions\biology\cellstructure-1.png" />
     <Content Include="questions\biology\celltransport-1-ans.png" />
@@ -121,6 +124,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="templates\teacher_home.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\call.html">
       <SubType>Code</SubType>
     </Content>
   </ItemGroup>
