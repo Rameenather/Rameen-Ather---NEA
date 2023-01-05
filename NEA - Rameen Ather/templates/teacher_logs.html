@@ -1,0 +1,60 @@
+{% extends "base.html" %} {% block title %}Student Home{% endblock %} 
+{% block content%}
+
+<link rel="stylesheet" href="static/styles.css" />
+<br />
+<div>
+
+    <p>>Log what you have taught and to what student by there name and email :D</p>
+</div>
+
+
+<br />
+<form method="POST">
+    <label>Students email</label>
+    <input type="text" id="student_email" name="student_email" />
+    <label>Students name</label>
+    <input type="text" id="student_name" name="student_name" />
+    <label>what did you teach</label>
+    <input type="text" id="taught" name="taught"/>
+    <input type="submit"/>
+</form>
+
+<br />
+
+<h1>All the teaching :D </h1>
+
+<div id="post">
+    {% for post in posts %} 
+    {%if post.teacher == user.id %}
+    <div class="card border-dark">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <a href="/posts/{{post.student_name}}">{{post.student_name}}</a>
+            <div class="btn-group">
+                <button type="button"
+                        class="btn btn-sm btn-primary dropdown-toggle"
+                        data-bs-toggle="dropdown">
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="/delete-post/{{post.id}}" class="dropdown-item">Delete</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="card-text">{{post.taught}}</div>
+        </div>
+        <div class="card-footer text-muted">{{post.date_created}}</div>
+    </div>
+    {%else%}
+
+    {% endif %}
+    {% endfor %}
+
+
+</div>
+
+
+ {% endblock %}
+

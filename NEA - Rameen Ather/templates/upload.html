@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block title %}Upload images{% endblock %} {% block content
+%}
+
+
+<p>Please upload one image per question</p>
+
+
+
+
+
+
+
+
+
+<br />
+
+<form method=post enctype=multipart/form-data>
+    <input type=file name=file>
+    <input type=submit value=Upload>
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %} {% block title %}Logs{% endblock %} {% block content
+%}
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="static/styles.css">
+    <script src="https://cdnjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script>
+        var socket = io();
+    </script>
+</head>
+<body>
+    <p id="sender-input" value="{{user.id}}">{{user.id}}</p>
+    <form id="chat-form">
+        <select id="recipient-select">
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.email }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" id="message-input" placeholder="Enter your message">
+        <button type="submit" id="send-button">Send</button>
+    </form>
+
+    <script>
+        function updateRecipientList() {
+            fetch('/users')
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (users) {
+                    var select = document.querySelector('#recipient-select');
+
+                    for (var i = 0; i < users.length; i++) {
+                        var option = document.createElement('option');
+                        option.value = users[i][0];
+                        option.text = users[i][1];
+                        select.add(option);
+                    }
+                });
+        }
+        window.onload = function () {
+            updateRecipientList();
+        }
+
+        function sendMessage(sender, recipient, message) {
+            fetch('/send', {
+                method: 'POST',
+                body: JSON.stringify({ sender: sender, recipient: recipient, message: message }),
+                headers: { 'Content-Type': 'application/json' }
+            }).then(function (response) {
+                console.log(response);
+            });
+        }
+
+        document.querySelector('#send-button').addEventListener('click', function () {
+            var sender = document.querySelector('#sender-input').value;
+            var recipient = document.querySelector('#recipient-select').value;
+            var message = document.querySelector('#message-input').value;
+            sendMessage(sender, recipient, message);
+            console.log(sender,message,recipient)
+        });
+
+        
+    </script>
+    
+
+
+</body>
+</html>
+
+
+{% endblock %}

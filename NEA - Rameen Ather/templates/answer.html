@@ -1,0 +1,73 @@
+{% extends "base.html" %} {% block title %}Answers{% endblock %} {% block content
+%}
+
+<link rel="stylesheet" href="static/styles.css" />
+
+<div>
+    <p style=" margin-top: 16px; ">Answers :D </p>
+    <p>Make sure to mark correctly and once done enter your mark :D</p>
+    <br />
+</div>
+
+<div>
+    <p>enter your mark accordingly</p>
+    <label>q1</label>
+    <input type="text" id="q1" />
+    <label>q2</label>
+    <input type="text" id="q2" />
+    <label>q3</label>
+    <input type="text" id="q3" />
+    <label>q4</label>
+    <input type="text" id="q4" />
+    <label>q5</label>
+    <input type="text" id="q5" />
+    <input type="submit" />
+</div>
+<br />
+
+<script>
+    function imagechange() {
+        var image_1 = document.getElementById('question_image')
+        this_value = this.value
+        if (this_value = 1) {
+            image_1.src = "static/q1-ans.png";
+        }
+        else if (this_value = 2) {
+            image_1.src = "static/q2-ans.png"
+        }
+        else if (this_value = 3) {
+            image_1.src = "static/q3-ans.png"
+        }
+        else if (this_value = 4) {
+            image_1.src = "static/q4-ans.png"
+        }
+        else if (this_value = 5) {
+            image_1.src = "static/q5-ans.png"
+        }
+
+    }
+</script>
+
+<centre>
+    <div class="pagination_section" style="margin-left:200px">
+        <a title="question 1" onclick="imagechange()" id="q1" value="1">1</a>
+        <a title="question 2" id="q2" onclick="imagechange()" value="2">2</a>
+        <a title="question 3" id="q3" onclick="imagechange()" value="3">3</a>
+        <a title="question 4" id="q4" onclick="imagechange()" value="4">4</a>
+        <a title="question 5" id="q5" onclick="imagechange()" value="5">5</a>
+    </div>
+</centre>
+
+
+<div>
+    <img src="static/q1-ans.png" alt="question 1" id="question_image" style="margin-left:200px">
+</div>
+
+
+
+<br />
+
+
+
+
+{% endblock %}

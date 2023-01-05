@@ -1,0 +1,257 @@
+<div class=" container">
+    <form>
+        <div class="form-group">
+            <label for="formControlRange">Lipids</label>
+            <input type="range" class="form-control-range" min="0" max="5" step="0.5" id="customRange3" align="center">
+        </div>
+        <div class="form-group">
+            <label for="formControlRange">Carbohydrates</label>
+            <input type="range" class="form-control-range" min="0" max="5" step="0.5" id="customRange3" align="center">
+        </div>
+        <div class="form-group">
+            <label for="formControlRange">Protein</label>
+            <input type="range" class="form-control-range" min="0" max="5" step="0.5" id="customRange3" align="center">
+        </div>
+        <div class="form-group">
+            <label for="formControlRange">DNA</label>
+            <input type="range" class="form-control-range" min="0" max="5" step="0.5" id="customRange3" align="center">
+        </div>
+        <div class="form-group">
+            <label for="formControlRange">Water and Inorganic ions</label>
+            <input type="range" class="form-control-range" min="0" max="5" step="0.5" id="customRange3" align="center">
+        </div>
+        <div class="form-group">
+            <label for="formControlRange">ATP</label>
+            <input type="range" class="form-control-range" min="0" max="5" step="0.5" id="customRange3" align="center">
+        </div>
+    </form>
+</div>
+
+
+<div class="container">
+    <h2>Range Sliders <small>Only tested in Chrome!</small></h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="range">
+                <input type="range" name="range" min="1" max="100" value="50" onchange="range.value=value">
+                <output id="range">50</output>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="range range-primary">
+                <input type="range" name="range" min="1" max="100" value="50" onchange="rangePrimary.value=value">
+                <output id="rangePrimary">50</output>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="range range-success">
+                <input type="range" name="range" min="1" max="100" value="50" onchange="rangeSuccess.value=value">
+                <output id="rangeSuccess">50</output>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="range range-info">
+                <input type="range" name="range" min="1" max="100" value="50" onchange="rangeInfo.value=value">
+                <output id="rangeInfo">50</output>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="range range-warning">
+                <input type="range" name="range" min="1" max="100" value="50" onchange="rangeWarning.value=value">
+                <output id="rangeWarning">50</output>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="range range-danger">
+                <input type="range" name="range" min="1" max="100" value="50" onchange="rangeDanger.value=value">
+                <output id="rangeDanger">50</output>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+-DATABASAE STUFF-
+
+import mysql.connector
+mydb = mysql.connector.connect(
+    host = "localhost",
+    user = "ram",
+    password = "Street4.",
+    database = "testdatabase"
+
+
+
+    )
+
+mycursor = mydb.cursor()
+
+
+
+#with open('questions/Bio.png', 'rb') as f:
+ #   m = f.read()
+  #  print(m)
+
+#name = "lipids"
+#topic = "lipids"
+
+#with open('questions/Lipid-1.PNG' , 'rb') as f:
+#    question = f.read()
+
+#with open('questions/Lipid-1-ans.PNG' , 'rb') as b:
+ #   answer = b.read()
+
+#cursor.execute("""INSERT INTO my_table (name,topic, question,answer) VALUES (?,?,?,?)""",(name,topic,question,answer))
+
+#sqlite stuff 
+#cursor.execute("""
+#CREATE TABLE my_table (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL , name TEXT, topic TEXT, question BLOB, answer BLOB)
+
+#""")
+
+#writing the question into the database
+
+with open('questions/biology/DNA-1.PNG' , 'rb') as f:
+    question = f.read()
+
+with open('questions/biology/DNA-1-ans.PNG','rb') as a:
+    ans = a.read()
+
+topic = "dna"
+cursor.execute("""
+INSERT INTO questions (topic,question,answer,marks) VALUES (?,?,?,?)""",(topic,question,ans,8))
+
+
+
+
+
+
+mycursor.execute("DESCRIBE People")
+for x in mycursor:
+    print(x)
+
+
+
+#code for sending an email
+-sending an email- 
+import smtplib
+import random
+from main import database
+
+#Login email detail and sending email detail
+my_email = "testingmycode1@outlook.com"
+password  = "Street4."
+send_email = "rameenather22@gmail.com"
+
+
+
+
+
+#initialize connection to our email server, we will use Outlook here
+def send_an_email(my_email,password,send_email,text):
+
+    """Sends an email"""
+
+    with smtplib.SMTP('smtp-mail.outlook.com', port='587') as smtp:
+        smtp.ehlo()  # send the extended hello to our server
+        smtp.starttls()  # tell server we want to communicate with TLS encryption
+        smtp.login(user = my_email, password = password)  # login to our email server
+        smtp.sendmail(from_addr =my_email,
+                      to_addrs = send_email,
+                      msg = f"""Subject:Email from maths/Biology \n\n {text}""") #The email message. 
+    print("email success")
+
+
+
+
+    <main class="wrapper">
+
+    <form class="all-sliders" method="post">
+        <label class="slidecontainer third">
+            <span>Lipid</span>
+            <output class="numoutput" id="range">100</output>
+            <input class="slider" name="lipids" id="lipids" type="range" min="1" step="1" max="100" value="100" onchange=" range.value = value">
+            <div id="demo"></div>
+        </label>
+        <label class="slidecontainer third">
+            <span>Protein</span>
+            <output id="rangeprotein">100</output>
+            <input class="slider" name="protein" id="protein" type="range" min="1" step="1" max="100" value="100" onchange=" rangeprotein.value = value">
+            <div id="demo"></div>
+        </label>
+        <label class="slidecontainer third">
+            <span>water</span>
+            <output id="rangewater">100</output>
+            <input class="slider" name="water" id="water" type="range" min="1" step="1" max="100" value="100" onchange=" rangewater.value = value">
+            <div id="demo"></div>
+        </label>
+        <label class="slidecontainer third ">
+            <span>atp</span>
+            <output id="rangeatp">100</output>
+            <input class="slider" name="atp" id="atp" type="range" min="1" step="1" max="100" value="100" onchange=" rangeatp.value = value">
+            <div id="demo"></div>
+        </label>
+        <label class="slidecontainer third ">
+            <span>Carbohydrates</span>
+            <output id="rangecarbohydrates">100</output>
+            <input class="slider" name="Carbohydrates" id="Carbohydrates" type="range" min="1" step="1" max="100" value="100" onchange=" rangecarbohydrates.value = value">
+            <div id="demo"></div>
+        </label>
+        <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+</main>
+
+
+
+tables_biology = {
+         '1': ['Lipids', 'Carbohydrates','Proteins and Enzymes','DNA ', 'ATP', 'Water and Inorgranic ions'],
+         '2': ['Cell structure','Transport across cell membranes','Cell cycle','Immune system'],
+         '3': ['Gas Exchange','Digestion and Absorption','Mass Transport'],
+         '4': ['Protein Synthesis','Biodiversity ','Genetic Diversity '],
+         '5': ['Photosynthesis','Respiration','Nitrogen Cycle','Energy and ecosystem'],
+         '6': ['Homeostasis','Nervous coordination and muscles','Response to stimuli',],
+         '7': ['Populations in ecosystems','Inheritance and genetic crosses','Evolution and Speciation'],
+         '8': ['Gene Mutation','Stem cells','Genetic Fingerprinting ','Gene Expression and Cancer']
+          }
+
+
+          m = cursor.fetchall()
+    type(result[0][0])
+#If the type is byte, use from io import BytesIOf. If str, use from io import StringIO.
+    file_like= BytesIO(result[0][0])
+    img=PIL.Image.open(file_like)
+    img.show()
+    with open("q1.png", "wb") as fh:
+        fh.write(base64.decodebytes(m))
+    print(type(m))
+    #image_2 = base64.decodebytes(m)
+    #w = open("q1.png", "w") 
+    #w.write(image_2)
+    #w.close()
+
+
+
+        function sendTime() {
+
+        totaltimmy = document.getElementById("test").value;
+        const dics_values = { totaltimmy }
+        const s = JSON.stringify(dics_values);
+        console.log(s);
+        $.ajax({
+            url: '/shit',
+            type: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify(s)
+
+        });
+    }

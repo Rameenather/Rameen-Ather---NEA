@@ -1,0 +1,129 @@
+{% extends "base.html" %} {% block title %}Student Home{% endblock %} {% block content
+%}
+<link rel="stylesheet" href="static/styles.css" />
+<div>
+    <p style=" margin-top: 16px; ">Answering question time :D. </p>
+    <p>These questions will be timed on how long you take, so make sure to not leave your device open with this page :D</p>
+    <br />
+    <p class="time" id="demo"></p>
+</div>
+
+
+<button type="submit" onclick='run = false , clicked()'>hello</button>
+
+<input type="submit" onclick="sendinfo() , clicked()" />
+
+<button href="/upload.html"></button>
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+    function imagechange() {
+        var image_1 = document.getElementById('question_image')
+        this_value = this.value
+        if (this_value = 1) {
+            image_1.src = "static/q1.png";
+        }
+        else if (this_value = 2) {
+            image_1.src = "static/q2.png"
+        }
+        else if (this_value = 3) {
+            image_1.src = "static/q3.png"
+        }
+        else if (this_value = 4) {
+            image_1.src = "static/q4.png"
+        }
+        else if (this_value = 5) {
+            image_1.src = "static/q5.png"
+        }
+
+    }
+
+
+    var currentTime_s = 0;
+    var currentTime_m = 0;
+    var currentTime_h = 0;
+    var totalTime = 0
+    var run = true;
+    var time = "time";
+
+
+
+
+
+    var x = setInterval(function () {
+        if (run == false) {
+            document.getElementById("test").innerHTML = "You took " + totalTime + " seconds";
+            document.getElementById("test").value = totaltime;
+            sendTime()
+            return;
+        }
+        else {
+
+            currentTime_s = currentTime_s + 1;
+            totalTime = totalTime + 1;
+
+            if (currentTime_s == 60) {
+                currentTime_m = currentTime_m + 1;
+                currentTime_s = 0
+                if (currentTime_m == 60) {
+                    currentTime_h = currentTime_h + 1;
+                    currentTime_m = 0
+                }
+            }
+
+            // Display the result in the element with id="demo"
+            document.getElementById("demo").innerHTML = currentTime_h + "h "
+                + currentTime_m + "m " + currentTime_s + "s ";
+
+
+        };
+    }, 1000);
+
+
+    function sendinfo() {
+        const request = new XMLHttpRequest()
+        request.open('POST', '/ProcessorUserInfo/${JSON.stringify(totaltime)}')
+        request.send();
+    }
+
+
+
+    function clicked() {
+        if (!confirm('Are you sure?')) {
+            e.preventDefault();
+        }
+    }
+
+</script>
+<br />
+<p id="test"></p>
+<br />
+
+
+<!--Changing the image using a javascript function-->
+<centre>
+    <div class="pagination_section" style="margin-left:200px">
+        <a title="question 1" onclick="imagechange()" id="q1" value="1">1</a>
+        <a title="question 2" id="q2" onclick="imagechange()" value="2">2</a>
+        <a title="question 3" id="q3" onclick="imagechange()" value="3">3</a>
+        <a title="question 4" id="q4" onclick="imagechange()" value="4">4</a>
+        <a title="question 5" id="q5" onclick="imagechange()" value="5">5</a>
+    </div>
+</centre>
+
+
+
+<!-- the images of the questions will go here -->
+<div>
+    <img src="static/q1.png" alt="question 1" id="question_image" style="margin-left:200px">
+</div>
+
+
+
+
+    {% endblock %}
+

@@ -1,0 +1,164 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>3dd596d2-12ca-4abf-b83f-6035d3d9cd07</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>main.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>Maths_Project</Name>
+    <RootNamespace>Maths_Project</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="auth.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="database_attempt.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="logs_input.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="main.py" />
+    <Compile Include="models.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="admin.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="account.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="views.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="questions\" />
+    <Folder Include="questions\biology\" />
+    <Folder Include="static\" />
+    <Folder Include="static\marking\" />
+    <Folder Include="static\questions\" />
+    <Folder Include="static\user_ans\" />
+    <Folder Include="templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".env">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="extra.txt">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="image_stuff.jpg" />
+    <Content Include="q1.jpg" />
+    <Content Include="static\call.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="static\questions\lipid-1-ans.png" />
+    <Content Include="static\questions\q1.png" />
+    <Content Include="questions\biology\cellstructure-1-ans.png" />
+    <Content Include="questions\biology\cellstructure-1.png" />
+    <Content Include="questions\biology\celltransport-1-ans.png" />
+    <Content Include="questions\biology\celltransport-1.png" />
+    <Content Include="questions\biology\digestion&amp;absorption-1-ans.png" />
+    <Content Include="questions\biology\digestion&amp;absorption-1.png" />
+    <Content Include="questions\biology\digestion&amp;absorption-2-ans.png" />
+    <Content Include="questions\biology\digestion&amp;absorption-2.png" />
+    <Content Include="questions\biology\DNA-1-ans.png" />
+    <Content Include="questions\biology\DNA-1.png" />
+    <Content Include="questions\biology\lipid-1-ans.png" />
+    <Content Include="questions\biology\lipid-1.png" />
+    <Content Include="quotes.txt">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="static\index.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="static\styles.css">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="static\VerlyRange.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\answer.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\base.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\fuck.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\help_bio.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\help_maths.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\home.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\logging.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\logging_maths.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\login.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\main_page.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\mark.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\questions.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\quiz_bio.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\quiz_maths.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\sign_up.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\teacher_home.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\chat.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\teacher_logs.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\upload.html">
+      <SubType>Code</SubType>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

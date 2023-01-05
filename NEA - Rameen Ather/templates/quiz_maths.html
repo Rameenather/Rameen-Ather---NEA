@@ -1,0 +1,82 @@
+{% extends "base.html" %} {% block title %}Student Home{% endblock %} {% block content
+%}
+<link rel="stylesheet" href="static/styles.css" />
+
+
+
+<head>
+    <script type="text/javascript">
+        function populate(s1,s2) {
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+
+            if (s1.value == "1") {
+                var optionArray = ['|', "proof|proof", "algebra_and_functions|algebra andfunctions", "coordinate_geometry|coordinate geometry", "sequences_and_series|sequences and series", "trigonometry|trigonometry", "exponentials_and_logarithms|exponentials and logarithms", "trigonometry|trigonometry", "differentiation|differentiation", "integration|integration", "numerical_methods|numerical methods"];
+            }
+            else if (s1.value == "2") {
+                var optionArray = ['|', "vectors|vectors", "quantities_and_units_in_mechanics|quantities_and_units_in_mechanics", "kinematics|kinematics", "forces_and_Newton’s_laws|forces and Newton’s laws", "moments|moments"];
+            }
+            else if (s1.value == "3") {
+                var optionArray = ['|', "statistical_sampling|statistical_sampling", "data_presentation_and_interpretation|data presentation and interpretation", "probability|probability", "statistical_distributions|statistical distributions", "statistical_hypothesis_testing|statistical hypothesis testing"];
+            }
+          
+           
+
+            for (var option in optionArray) {
+                var pair = optionArray[option].split("|");
+                var newOption = document.createElement("option");
+                newOption.value = pair[0];
+                newOption.innerHTML = pair[1];
+                s2.options.add(newOption);
+
+
+            }
+
+        }
+
+
+    </script>
+</head>
+<link rel="stylesheet" href="static/styles.css" />
+<body>
+    <div>
+
+        <h1 class="hometitle">Welcome, <span class="name">{{name}}</span></h1>
+        <p>Answering question time :D</p>
+        <p>First you have to pick what topic questions do you want or do you want them from the all specification :D</p>
+    </div>
+    <hr />
+    <form method="POST" action="questions">
+        choose topic:
+        <select id="slct1" name="slct1" onchange="populate(this.id,'slct2')">
+            <option value="">nothin</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+
+
+        </select>
+
+        <hr />
+        choose subtopic:
+        <select id="slct2" name="slct2">
+            <option value="">nothin</option>
+
+
+        </select>
+        <hr />
+        <button class="submit">question time</button>
+    </form>
+</body>
+
+
+
+
+
+
+
+
+<!-- the images of the questions will go here -->
+    {% endblock %}
+
