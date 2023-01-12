@@ -5,6 +5,7 @@ from __init__ import *
 import json
 from models import User
 import random
+import numpy
 import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, abort
@@ -12,7 +13,9 @@ from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import VideoGrant
 from werkzeug.utils import secure_filename
 from account import account
-
+import matplotlib
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 
 
 views = Blueprint('views', __name__)
@@ -75,7 +78,7 @@ def logs_maths():
 @login_required
 def help_bio():
     acc.test()
-        
+    
     return render_template('help_bio.html', user=current_user, name = current_user.first_name)
 
 
@@ -272,5 +275,34 @@ def mark():
 
     return render_template('mark.html', user = current_user,)
 
+@views.route('/stats', methods =['GET','POST'] )
+@login_required
+def update():
+        data1 = acc.get_data(1)
+        plot_div1 = acc.draw_graph(data1[0],data1[2],1)
 
+        data2 = acc.get_data(2)
+        plot_div2 = acc.draw_graph(data2[0],data2[2],2)
+
+        data3 = acc.get_data(3)
+        plot_div3 = acc.draw_graph(data3[0],data3[2],3)
+
+        data4 = acc.get_data(4)
+        plot_div4 = acc.draw_graph(data4[0],data4[2],4)
+
+        data5 = acc.get_data(5)
+        plot_div5 = acc.draw_graph(data5[0],data5[2],5)
+
+        data6 = acc.get_data(6)
+        plot_div6 = acc.draw_graph(data6[0],data6[2],6)
+
+        data7 = acc.get_data(7)
+        plot_div7 = acc.draw_graph(data7[0],data7[2],7)
+
+        data8 = acc.get_data(8)
+        plot_div8 = acc.draw_graph(data8[0],data8[2],2)
+        return render_template('stats.html', user = current_user, plot_div1 = plot_div1, plot_div2=plot_div2,
+                              plot_div3 = plot_div3, plot_div4=plot_div5, 
+                              plot_div5 = plot_div5, plot_div6=plot_div6,
+                              plot_div7 = plot_div7, plot_div8=plot_div8)
 

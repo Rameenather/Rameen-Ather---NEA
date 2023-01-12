@@ -9,9 +9,74 @@
 
 
 
+
+<!--Changing the image using a javascript function-->
+<centre>
+    <div class="pagination_section" style="margin-left:200px">
+        <a title="question 1" onclick="imagechange()" id="q1" value="1">1</a>
+        <a title="question 2" id="q2" onclick="imagechange()" value="2">2</a>
+        <a title="question 3" id="q3" onclick="imagechange()" value="3">3</a>
+        <a title="question 4" id="q4" onclick="imagechange()" value="4">4</a>
+        <a title="question 5" id="q5" onclick="imagechange()" value="5">5</a>
+    </div>
+</centre>
+
+
+
+<div>
+    <p>Once marked enter the mark recived for each question</p>
+    <label>q1</label>
+    <input type="text" id="q1" />
+    <label>q2</label>
+    <input type="text" id="q2" />
+    <label>q3</label>
+    <input type="text" id="q3" />
+    <label>q4</label>
+    <input type="text" id="q4" />
+    <label>q5</label>
+    <input type="text" id="q5" />
+    <input type="submit" link ="home.html"/>
+</div>
+<br />
+
+
+
 <div>
     <img src="static/marking/mark1.png" alt="question 1" id="question_image" style="margin-left:200px">
 </div>
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+    function imagechange() {
+        var image_1 = document.getElementById('question_image')
+        this_value = this.value
+        if (this_value = 1) {
+            image_1.src = "static/marking/mark1.png";
+        }
+        else if (this_value = 2) {
+            image_1.src = "static/marking/mark2.png"
+        }
+        else if (this_value = 3) {
+            image_1.src = "static/marking/mark3.png"
+        }
+        else if (this_value = 4) {
+            image_1.src = "static/marking/mark4.png"
+        }
+        else if (this_value = 5) {
+            image_1.src = "static/marking/mark5.png"
+        }
+
+    }
+
+
+
+</script>
+
+
 
 
 

@@ -52,6 +52,7 @@
     <Folder Include="questions\biology\" />
     <Folder Include="static\" />
     <Folder Include="static\marking\" />
+    <Folder Include="static\user_stats\" />
     <Folder Include="static\questions\" />
     <Folder Include="static\user_ans\" />
     <Folder Include="templates\" />
@@ -137,6 +138,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="templates\sign_up.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\stats.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="templates\teacher_home.html">

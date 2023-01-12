@@ -4,12 +4,23 @@ from __init__ import db ,ALLOWED_EXTENSIONS
 from datetime import date , datetime
 from models import User, post
 import os
+import csv
 import json
+import numpy
 import base64
 import random
 import smtplib
 import sqlite3
 import statistics 
+import pandas as pd
+import plotly.express as px
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
+
+
+
+
 
 
 
@@ -18,9 +29,9 @@ class account:
     #student account
     def __init__(self):
         self.ids = []
-        self.temp = []
+        self.temp = 0 
         self.topic = None
-        self.marking = []
+        self.marking = 0
 
     def test(self):
         print("hello test :P")
@@ -29,26 +40,26 @@ class account:
 
 
     def clear_all(self):
-        if os.path.exists('static/questions/q1.png'):
-            os.remove('static/questions/q1.png')
-            os.remove('static/questions/q1-ans.png')
-        if os.path.exists('static/questions/q2.png'):
-            os.remove('static/questions/q2.png')
-            os.remove('static/questions/q2-ans.png')
-        if os.path.exists('static/questions/q3.png'):
-            os.remove('static/questions/q3.png')
-            os.remove('static/questions/q3-ans.png')
-        if os.path.exists('static/questions/q4.png'):
-            os.remove('static/questions/q4.png')
-            os.remove('static/questions/q4-ans.png')
-        if os.path.exists('static/questions/q5.png'):
-            os.remove('static/questions/q5.png')
-            os.remove('static/questions/q5-ans.png')
+        user = current_user
+        if os.path.exists(f'static/questions/{user.id}q1.png'):
+            os.remove(f'static/questions/{user.id}q1.png')
+            os.remove(f'static/questions/{user.id}q1-ans.png')
+        if os.path.exists(f'static/questions/{user.id}q2.png'):
+            os.remove(f'static/questions/{user.id}q2.png')
+            os.remove(f'static/questions/{user.id}q2-ans.png')
+        if os.path.exists(f'static/questions/{user.id}q3.png'):
+            os.remove(f'static/questions/{user.id}q3.png')
+            os.remove(f'static/questions/{user.id}q3-ans.png')
+        if os.path.exisfts(f'static/questions/{user.id}q4.png'):
+            os.remove(f'static/questions/{user.id}q4.png')
+            os.remove(f'static/questions/{user.id}q4-ans.png')
+        if os.path.exists(f'static/questions/{user.id}q5.png'):
+            os.remove(f'static/questions/{user.id}q5.png')
+            os.remove(f'static/questions/{user.id}q5-ans.png')
 
         while(self.ids != []):
             self.ids.pop()
-        while(self.temp != []):
-            self.temp.pop()
+        self.temp = 0
 
     def questions(self,topic):
         """Gets the question of the topic the user wants"""
@@ -64,7 +75,7 @@ class account:
             WHERE topic = ?
             """,[topic])
         print(m)
-    
+        user = current_user
 
         for i in range(5):
             try:
@@ -75,10 +86,10 @@ class account:
                     rec_test1 = x[(ran*3) +2]
         
 
-                with open(f'static/questions/q{i}.png','wb') as q:
+                with open(f'static/questions/{user.id}q{i}.png','wb') as q:
                     q.write(rec_test)
 
-                with open(f'static/questions/q{i}-ans.png','wb') as a:
+                with open(f'static/questions/{user.id}q{i}-ans.png','wb') as a:
                     a.write(rec_test1)
             except:
                 i-=1
@@ -89,9 +100,10 @@ class account:
         current_date = date.today()
         user_id = user.id
     
-        ma_id = cursor.execute("""SELECT id_for_marking
-                                        FROM account_answer
+        self.temp = cursor.execute("""SELECT questions_done_id
+                                        FROM account_marks
                                         ORDER BY DESC limit 1; """).fetchall()
+        self.temp += 1 
         conn.commit()
         for i in range(5):
             cursor.execute (f"""
@@ -101,10 +113,9 @@ class account:
             last_id = cursor.execute("""SELECT questions_done_id
                                         FROM account_marks
                                         ORDER BY DESC limit 1; """).fetchall()
-            self.temp.append(last_id)
             conn.commit()
-            cursor.execute("""INSERT INTO account_answer(id_for_marking, questions_done_id) VALUES (?,?) """ 
-                           (ma_id,last_id))
+            cursor.execute("""INSERT INTO account_answer(questions_done_id) VALUES (?) """ 
+                           (self.temp))
             conn.commit()
 
 
@@ -140,10 +151,10 @@ class account:
                 rec_data = x[1]
                 rec_data1 = x[2]
 
-            with open(f'static/questions/q{i}.png','wb') as f:
+            with open(f'static/questions/{user.id}q{i}.png','wb') as f:
                 f.write(rec_data)
 
-            with open(f'static/questions/q{i}-ans.png','wb') as a:
+            with open(f'static/questions/{user.id}q{i}-ans.png','wb') as a:
                 a.write(rec_data1)
     
 
@@ -292,21 +303,6 @@ class account:
             recombinantDNAtechnology = request.form.get('recombinantDNAtechnology')
 
             #will be stored in database :D this is temp
-            topic = {
-                'lipids':lipids,
-                'protein':protein,
-                'water':water,
-                'atp':atp,
-                'Carbohydrates':Carbohydrates,
-                'dna':dna,
-                'Cellstructure':Cellstructure,
-                'transportacrossmembrane':transportacrossmembrane,
-                'cellcycle':cellcycle,
-                'immunesystem':immunesystem,
-                'geneexpression':geneexpression
-
-                }
-            print(topic)
             conn = sqlite3.connect('database.db')
             cursor = conn.cursor()
         
@@ -410,33 +406,7 @@ class account:
             conn.close()
         
 
-    def get_best_topic(self,logs):
-       """Calculating the best topic to study at the time might vhange """
-       temp = 0
-       optimal = None
-       temp_list = []
-       for i in range(5):
-           for j in range(len(self.logs[i+1])):
-               temp+=self.logs[i+1][j]
-               temp_list.append(temp/4)
-               temp = 0
-       optimal = higher(temp_list)
-       print(optimal)
 
-
-    def highest(hi):
-
-        highest = 0
-        index = 0
-        for i in range(1,len(hi)):
-            if hi[i] > hi[i-1]:
-                highest = hi[i]
-                index = i
-                print(highest)
-        else:
-           highest = hi[i-1]
-           index = i-1
-        return index
 
     def get_teacher(self):
         conn = sqlite3.connect('database.db')
@@ -479,121 +449,250 @@ class account:
         with open(f'static/user_ans/{filename}' , 'rb') as u:
             image_ans = u.read()
 
-
+            #here123
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
         cursor.execute("""
             INSERT INTO account_answer(question_done_id, user_answers) VALUES (?,?)""",
-            (self.temp[0],image_ans))
+            (self.temp,image_ans))
         conn.commit()
         cursor.close()
         conn.close()
 
         os.remove(f"static/user_ans/{filename}")
 
-
-    def get_stats():
+    def get_data(self,num):
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
 
         user = current_user
-        current_date = date.today()
         user_id = user.id
 
-        topic1 = cursor.execute (f"""
-            SELECT lipid, carbohydrates, protein_and_enzymes, dna, atp, Water_and_inorganic_ions
-            FROM topic1
-            WHERE account_id = ?
-            """,[user_id])
-         
-        topic2 = cursor.execute (f"""
-            SELECT cell_structure, transport_across_membrane ,cell_cycle, immune_system
-            FROM topic2
-            WHERE account_id = ?
-            """,[user_id])
-         
-        topic3 = cursor.execute (f"""
-            SELECT gas_exchange, digestion_and_absorption, mass_transport
-            FROM topic3
-            WHERE account_id = ?
-            """,[user_id])
+        mean = []
+        stdev = []
+        topics = []
 
-        topic4 = cursor.execute (f"""
-            SELECT protein_synthesis, biodiversity, genetic_diversity
-            FROM topic4
-            WHERE account_id = ?
-            """,[user_id])
+        if num == 1:
 
-        topic5 = cursor.execute (f"""
-            SELECT photosynthesis, respiration, nitrogen_cycle, energy_and_ecosystem
-            FROM topic5
-            WHERE  account_id = ?
-            """,[user_id])
+            cursor.execute (f"""
+                SELECT lipid, carbohydrates, protein_and_enzymes, dna, atp, Water_and_inorganic_ions
+                FROM topic1
+                WHERE account_id = ?
+                """,[user_id])
+            topic_1 = cursor.fetchall()
+            list_2d = [[],[],[],[],[],[]]
 
-        topic6 = cursor.execute (f"""
-            SELECT homeostasis,nervous_coordination_and_muscles, response_to_stimuli
-            FROM topic6
-            WHERE  account_id = ?
-            """,[user_id])
+            for row in topic_1:
+                list_2d[0].append(row[0])
+                list_2d[1].append(row[1])
+                list_2d[2].append(row[2])
+                list_2d[3].append(row[3])
+                list_2d[4].append(row[4])
+                list_2d[5].append(row[5])
+        
+            for i in range(len(list_2d)):
+                mean.append(statistics.mean(list_2d[i]))
 
-        topic7 = cursor.execute (f"""
-            SELECT inherited_change, population_and_evolution, population_in_ecosystems
-            FROM topic7
-            WHERE  account_id = ?
-            """,[user_id])
+            for i in range(len(list_2d)):
+                stdev.append(round(statistics.stdev(list_2d[i]),2))
 
-        topic8 = cursor.execute (f"""
-            SELECT gene_expression, recombinant_DNA_technology
-            FROM topic8
-            WHERE  account_id = ?
-            """,[user_id])
-
-        t1 = topic1.fetchall()
-        results1 = get_stats(t1)
-
-        t2 = topic2.fetchall()
-        results2 = get_stats(t2)
-
-        t3 = topic3.fetchall()
-        results3 = get_stats(t3)
-
-        t4 = topic4.fetchall()
-        results4 = get_stats(t4)
-
-        t5 = topic5.fetchall()
-        results5 = get_stats(t5)
-        t6 = topic6.fetchall()
-        results6 = get_stats(t6)
-        t7 = topic7.fetchall()
-        results7 = get_stats(t7)
-        t8 = topic8.fetchall()
-        results8 = get_stats(t8)
+            topics = [i[0] for i in cursor.description]
+            return (mean,stdev,topics)
 
 
-        conn.commit()
-        cursor.close()
-        conn.close()
+        elif num == 2:
+            cursor.execute (f"""
+                SELECT cell_structure, transport_across_membrane, cell_cycle, immune_system
+                FROM topic2
+                WHERE account_id = ?
+                """,[user_id])
+            topic_1 = cursor.fetchall()
+            list_2d = [[],[],[],[]]
 
-    def get_stats(self,t1):
+            for row in topic_1:
+                list_2d[0].append(row[0])
+                list_2d[1].append(row[1])
+                list_2d[2].append(row[2])
+                list_2d[3].append(row[3])
 
-        temp = []
+            
+            for i in range(len(list_2d)):
+                mean.append(statistics.mean(list_2d[i]))
 
-        for row in t1:
-            for log in row:
-                temp[log] += log
-     
+            for i in range(len(list_2d)):
+                stdev.append(round(statistics.stdev(list_2d[i]),2))
 
-        highest1 = None
-        for i in temp:
-            if temp[i+1] > temp[i]:
-                highest = temp[i+1]
-            else:
-                highest = temp[i]
+            
+            topics = [i[0] for i in cursor.description]
+            return (mean,stdev,topics)
+
+        elif num == 3:
+            cursor.execute (f"""
+                SELECT gas_exchange, digestion_and_absorption, mass_transport
+                FROM topic3
+                WHERE account_id = ?
+                """,[user_id])
+            topic_1 = cursor.fetchall()
+            list_2d = [[],[],[]]
+
+            for row in topic_1:
+                list_2d[0].append(row[0])
+                list_2d[1].append(row[1])
+                list_2d[2].append(row[2])
+
+            
+            for i in range(len(list_2d)):
+                mean.append(statistics.mean(list_2d[i]))
+
+            for i in range(len(list_2d)):
+                stdev.append(round(statistics.stdev(list_2d[i]),2))
+
+            
+            topics = [i[0] for i in cursor.description]
+            return (mean,stdev,topics)
+
+        elif num == 4:
+            cursor.execute (f"""
+                SELECT protein_synthesis, biodiversity, genetic_diversity
+                FROM topic4
+                WHERE account_id = ?
+                """,[user_id])
+            topic_1 = cursor.fetchall()
+            list_2d = [[],[],[]]
+
+            for row in topic_1:
+                list_2d[0].append(row[0])
+                list_2d[1].append(row[1])
+                list_2d[2].append(row[2])
+
+            
+            for i in range(len(list_2d)):
+                mean.append(statistics.mean(list_2d[i]))
+
+            for i in range(len(list_2d)):
+                stdev.append(round(statistics.stdev(list_2d[i]),2))
+
+            
+            topics = [i[0] for i in cursor.description]
+            return (mean,stdev,topics)
+        
+        elif num == 5:
+            cursor.execute (f"""
+                SELECT photosynthesis, respiration, nitrogen_cycle, energy_and_ecosystem
+                FROM topic5
+                WHERE account_id = ?
+                """,[user_id])
+            topic_1 = cursor.fetchall()
+            list_2d = [[],[],[],[]]
+
+            for row in topic_1:
+                list_2d[0].append(row[0])
+                list_2d[1].append(row[1])
+                list_2d[2].append(row[2])
+                list_2d[3].append(row[3])
+
+            
+            for i in range(len(list_2d)):
+                mean.append(statistics.mean(list_2d[i]))
+
+            for i in range(len(list_2d)):
+                stdev.append(round(statistics.stdev(list_2d[i]),2))
+
+            
+            topics = [i[0] for i in cursor.description]
+            return (mean,stdev,topics)
+
+        elif num == 6:
+            cursor.execute (f"""
+                SELECT response_to_stimuli, nervous_coordination_and_muscles, homeostasis
+                FROM topic6
+                WHERE account_id = ?
+                """,[user_id])
+            topic_1 = cursor.fetchall()
+            list_2d = [[],[],[]]
+
+            for row in topic_1:
+                list_2d[0].append(row[0])
+                list_2d[1].append(row[1])
+                list_2d[2].append(row[2])
+
+            
+            for i in range(len(list_2d)):
+                mean.append(statistics.mean(list_2d[i]))
+
+            for i in range(len(list_2d)):
+                stdev.append(round(statistics.stdev(list_2d[i]),2))
+
+            
+            topics = [i[0] for i in cursor.description]
+            return (mean,stdev,topics)
+
+        elif num == 7:
+            cursor.execute (f"""
+                SELECT inherited_change, population_and_evolution, population_in_ecosystems
+                FROM topic7
+                WHERE account_id = ?
+                """,[user_id])
+            topic_1 = cursor.fetchall()
+            list_2d = [[],[],[]]
+
+            for row in topic_1:
+                list_2d[0].append(row[0])
+                list_2d[1].append(row[1])
+                list_2d[2].append(row[2])
+            
+            for i in range(len(list_2d)):
+                mean.append(statistics.mean(list_2d[i]))
+
+            for i in range(len(list_2d)):
+                stdev.append(round(statistics.stdev(list_2d[i]),2))
+
+            
+            topics = [i[0] for i in cursor.description]
+            return (mean,stdev,topics)
+
+        elif num == 8:
+            cursor.execute (f"""
+                SELECT gene_expression, recombinant_DNA_technology
+                FROM topic8
+                WHERE account_id = ?
+                """,[user_id])
+            topic_1 = cursor.fetchall()
+            list_2d = [[],[]]
+
+            for row in topic_1:
+                list_2d[0].append(row[0])
+                list_2d[1].append(row[1])
+            
+            for i in range(len(list_2d)):
+                mean.append(statistics.mean(list_2d[i]))
+
+            for i in range(len(list_2d)):
+                stdev.append(round(statistics.stdev(list_2d[i]),2))
+
+            
+            topics = [i[0] for i in cursor.description]
+            return (mean,stdev,topics)
+
+    
+
+    
+
+    def draw_graph(self, x, y,num ):
+        """Takes data input and displays it as a graph"""
+            fig = px.bar(x=x, y=y, title=f'Mean logs for topic {num}')
+        
+    # Display the graph on a website
+            fig.update_layout(xaxis_title='Topics',
+                              yaxis_title='Mean logs')
+            plot_div = fig.to_html(full_html = False)
+
+        
+            return plot_div
 
 
-        temp1 = statistics.stdev(temp)
-        temp2 = statictics.mean(temp)
-        return (temp1,temp2)
+
+    
 
 
 
@@ -639,7 +738,9 @@ class teacher():
             SELECT id_for_marking
             FROM account_answer
             """)
+
         questions_to_mark = random.choice(cursor)
+
         conn.commit()
         m = cursor.execute("""
             SELECT user_answers
@@ -662,10 +763,4 @@ class teacher():
         pass 
 
     def add_points():
-        pass
-
-class examiner():
-    #examiner account
-
-    def mark():
         pass

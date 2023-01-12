@@ -48,10 +48,10 @@ cursor.execute("""
 
 #storing the marks the user got after completing questions
 cursor.execute("""
-    CREATE TABLE IF NOT EXISTS account_marks (question_done_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    CREATE TABLE IF NOT EXISTS account_marks (question_done_id INTEGER PRIMARY KEY NOT NULL,
+    date_entered DATE NOT NULL,
     acc_id INTEGER NOT NULL,
     qa_id INTEGER NOT NULL,
-    date_entered DATE PRIMARY KEY NOT NULL,
     marks INTEGER ,
     FOREIGN KEY(acc_id)
         REFERENCES user (id),
@@ -60,8 +60,7 @@ cursor.execute("""
 
  #temporarily storing the question
 cursor.execute("""
-    CREATE TABLE IF NOT EXISTS account_answer (id_for_marking INTEGER NOT NULL,
-    question_done_id INTEGER NOT NULL,
+    CREATE TABLE IF NOT EXISTS account_answer (question_done_id INTEGER NOT NULL,
     user_answers BLOP,
     FOREIGN KEY(question_done_id)
         REFERENCES account_marks (question_done_id))""")
@@ -233,7 +232,7 @@ conn.close()
 #---------------------------------------------------------------------------------------#
 
 connected_user = {}
-
+import sys
 
 
 

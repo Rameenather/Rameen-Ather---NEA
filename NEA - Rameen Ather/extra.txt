@@ -255,3 +255,165 @@ tables_biology = {
 
         });
     }
+
+
+
+    
+    def get_stats():
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+
+        user = current_user
+        current_date = date.today()
+        user_id = user.id
+
+        topic1 = cursor.execute (f"""
+            SELECT lipid, carbohydrates, protein_and_enzymes, dna, atp, Water_and_inorganic_ions
+            FROM topic1
+            WHERE account_id = ?
+            """,[user_id])
+         
+        topic2 = cursor.execute (f"""
+            SELECT cell_structure, transport_across_membrane ,cell_cycle, immune_system
+            FROM topic2
+            WHERE account_id = ?
+            """,[user_id])
+         
+        topic3 = cursor.execute (f"""
+            SELECT gas_exchange, digestion_and_absorption, mass_transport
+            FROM topic3
+            WHERE account_id = ?
+            """,[user_id])
+
+        topic4 = cursor.execute (f"""
+            SELECT protein_synthesis, biodiversity, genetic_diversity
+            FROM topic4
+            WHERE account_id = ?
+            """,[user_id])
+
+        topic5 = cursor.execute (f"""
+            SELECT photosynthesis, respiration, nitrogen_cycle, energy_and_ecosystem
+            FROM topic5
+            WHERE  account_id = ?
+            """,[user_id])
+
+        topic6 = cursor.execute (f"""
+            SELECT homeostasis,nervous_coordination_and_muscles, response_to_stimuli
+            FROM topic6
+            WHERE  account_id = ?
+            """,[user_id])
+
+        topic7 = cursor.execute (f"""
+            SELECT inherited_change, population_and_evolution, population_in_ecosystems
+            FROM topic7
+            WHERE  account_id = ?
+            """,[user_id])
+
+        topic8 = cursor.execute (f"""
+            SELECT gene_expression, recombinant_DNA_technology
+            FROM topic8
+            WHERE  account_id = ?
+            """,[user_id])
+
+        t1 = topic1.fetchall()
+        results1 = get_stats(t1)
+
+
+        t2 = topic2.fetchall()
+        results2 = get_stats(t2)
+
+        t3 = topic3.fetchall()
+        results3 = get_stats(t3)
+
+        t4 = topic4.fetchall()
+        results4 = get_stats(t4)
+
+        t5 = topic5.fetchall()
+        results5 = get_stats(t5)
+        t6 = topic6.fetchall()
+        results6 = get_stats(t6)
+        t7 = topic7.fetchall()
+        results7 = get_stats(t7)
+        t8 = topic8.fetchall()
+        results8 = get_stats(t8)
+
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+
+
+    def data_into_csv(self):
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+
+        user = current_user
+        current_date = date.today()
+        user_id = user.id
+
+        cursor.execute (f"""
+            SELECT lipid, carbohydrates, protein_and_enzymes, dna, atp, Water_and_inorganic_ions
+            FROM topic1
+            WHERE account_id = ?
+            """,[user_id])
+
+        m_dict = cursor.fetchall()
+
+        with open(f"static/user_stats/{user.id}topic1.csv", "w", newline='') as csv_file:  # Python 3 version    
+             # Python 2 version
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow([i[0] for i in cursor.description]) # write headers
+            csv_writer.writerows(m_dict)
+
+        conn.close()
+
+            def get_stats(self,t1):
+
+        temp = []
+
+        for row in t1:
+            for log in row:
+                temp[log] += log
+     
+
+        highest1 = None
+        for i in temp:
+            if temp[i+1] > temp[i]:
+                highest = temp[i+1]
+            else:
+                highest = temp[i]
+
+        temp2 = statistics.mean(temp)
+        temp3 = statistics.median(temp)
+        return (temp1,temp2,temp3)
+
+
+
+            def get_best_topic(self,logs):
+       """Calculating the best topic to study at the time might vhange """
+       temp = 0
+       optimal = None
+       temp_list = []
+       for i in range(5):
+           for j in range(len(self.logs[i+1])):
+               temp+=self.logs[i+1][j]
+               temp_list.append(temp/4)
+               temp = 0
+       optimal = higher(temp_list)
+       print(optimal)
+
+
+    def highest(hi):
+
+        highest = 0
+        index = 0
+        for i in range(1,len(hi)):
+            if hi[i] > hi[i-1]:
+                highest = hi[i]
+                index = i
+                print(highest)
+        else:
+           highest = hi[i-1]
+           index = i-1
+        return index
