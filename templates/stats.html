@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block title %}Stats :D{% endblock %} {% block content
+%}
+
+<html>
+<body>
+    <p>See what topics you are weak in and try to improve :D</p>
+
+    <hr />
+    <div>
+        <h2>Your logs :D</h2>
+        {{plot_div1 | safe}}
+    </div>
+    <hr />
+    <div>
+
+        {{plot_div2 | safe}}
+    </div>
+    <hr />
+    <div>
+
+        {{plot_div3 | safe}}
+    </div>
+    <hr />
+    <div>
+
+        {{plot_div4 | safe}}
+    </div>
+    <hr />
+    <div>
+
+        {{plot_div5 | safe}}
+    </div>
+    <hr />
+    <div>
+
+        {{plot_div6 | safe}}
+    </div>
+    <hr />
+    <div>
+
+        {{plot_div7 | safe}}
+    </div>
+    <hr />
+    <div>
+
+        {{plot_div8 | safe}}
+    </div>
+    <hr />
+</body>
+</html>
+
+
+{% endblock %}

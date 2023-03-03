@@ -1,0 +1,173 @@
+{% extends "base.html" %} {% block title %}Logs{% endblock %} {% block content
+%}
+<h1 class="logs">Logs Maths</h1>
+<p>Enter your level of confidance with each of these topics to be recomended topics to learn and keep to track of what you have learnt and what you need to learn.</p>
+
+<head>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/anuraghazra/VerlyRangeSlider@v1.0.2/src/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/anuraghazra/Verly.js@v1.1.4/dist/verly.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/anuraghazra/VerlyRangeSlider@v1.0.2/src/VerlyRange.js"></script>
+    <link rel="stylesheet" href="static/styles.css " />
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0 20px;
+        }
+
+        body, html {
+            font-family: 'Francois One', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #f55693
+        }
+
+        .wrapper {
+            margin: 50px auto;
+            max-width: 980px;
+        }
+
+        section.all-sliders {
+            width: 100%;
+            float: left;
+        }
+    </style>
+
+</head>
+<body>
+    <main class="wrapper">
+
+        <form class="all-sliders" method="post">
+
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <p class="topictitle">Pure</p>
+                <span>proof</span>
+                <output class="numoutput" id="rangeproof">0</output>
+                <input class="slider" name="proof" id="proof" type="range" min="0" step="1" max="100" value="0" onchange=" rangeproof.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>algebra and functions</span>
+                <output id="rangealgebraandfunctions">0</output>
+                <input class="slider" name="algebraandfunctions" id="algebraandfunctions" type="range" min="0" step="1" max="100" value="0" onchange=" rangealgebraandfunctions.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>coordinategeometry</span>
+                <output id="rangecoordinategeometry">0</output>
+                <input class="slider" name="coordinategeometry" id="coordinategeometry" type="range" min="0" step="1" max="100" value="0" onchange=" rangecoordinategeometry.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>squencesandseries</span>
+                <output id="rangesquencesandseries">0</output>
+                <input class="slider" name="squencesandseries" id="squencesandseries" type="range" min="0" step="1" max="100" value="0" onchange=" rangesquencesandseries.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>trigonometry</span>
+                <output id="rangetrigonometry">0</output>
+                <input class="slider" name="trigonometry" id="trigonometry" type="range" min="0" step="1" max="100" value="0" onchange=" rangetrigonometry.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>exponentialsandlogarithms</span>
+                <output id="rangeexponentialsandlogarithms">0</output>
+                <input class="slider" name="exponentialsandlogarithms" id="exponentialsandlogarithms" type="range" min="0" step="1" max="100" value="0" onchange=" rangeexponentialsandlogarithms.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>differentiation</span>
+                <output id="rangedifferentiation">0</output>
+                <input class="slider" name="differentiation" id="differentiation" type="range" min="0" step="1" max="100" value="0" onchange=" rangedifferentiation.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>integration</span>
+                <output id="rangeintegration">0</output>
+                <input class="slider" name="integration" id="integration" type="range" min="0" step="1" max="100" value="0" onchange=" rangeintegration.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>numericalmethods</span>
+                <output id="rangenumericalmethods">0</output>
+                <input class="slider" name="numericalmethods" id="numericalmethods" type="range" min="0" step="1" max="100" value="0" onchange=" rangenumericalmethods.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <p class="topictitle">Mechanics</p>
+                <span>vectors</span>
+                <output class="numoutput" id="rangevectors">0</output>
+                <input class="slider" name="vectors" id="vectors" type="range" min="0" step="1" max="100" value="0" onchange=" range.vectors = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>quantitiesandunitsinmechanics</span>
+                <output id="rangequantitiesandunitsinmechanics">0</output>
+                <input class="slider" name="quantitiesandunitsinmechanics" id="quantitiesandunitsinmechanics" type="range" min="0" step="1" max="100" value="0" onchange=" rangenuquantitiesandunitsinmechanics.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>kinematics</span>
+                <output id="rangekinematics">0</output>
+                <input class="slider" name="kinematics" id="kinematics" type="range" min="0" step="1" max="100" value="0" onchange=" rangekinematics.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>forcesandnewtonslaws</span>
+                <output id="rangeforcesandnewtonslaws">0</output>
+                <input class="slider" name="forcesandnewtonslaws" id="forcesandnewtonslaws" type="range" min="0" step="1" max="100" value="0" onchange=" rangeforcesandnewtonslaws.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>moments</span>
+                <output id="rangemoments">0</output>
+                <input class="slider" name="moments" id="moments" type="range" min="0" step="1" max="100" value="0" onchange=" rangemoments.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <p class="topictitle">Stats</p>
+                <span>statisticalsampling</span>
+                <output class="numoutput" id="rangestatisticalsampling">0</output>
+                <input class="slider" name="statisticalsampling" id="statisticalsampling" type="range" min="0" step="1" max="100" value="0" onchange=" rangestatisticalsampling.proof = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>datapresentationandinterpretation</span>
+                <output id="rangedatapresentationandinterpretation">0</output>
+                <input class="slider" name="datapresentationandinterpretation" id="datapresentationandinterpretation" type="range" min="0" step="1" max="100" value="0" onchange=" rangedatapresentationandinterpretationnumericalmethods.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>probability</span>
+                <output id="rangeprobability">0</output>
+                <input class="slider" name="probability" id="probability" type="range" min="0" step="1" max="100" value="0" onchange=" rangeprobability.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>statisticaldistributions</span>
+                <output id="rangestatisticaldistributions">0</output>
+                <input class="slider" name="statisticaldistributions" id="statisticaldistributions" type="range" min="0" step="1" max="100" value="0" onchange=" rangestatisticaldistributions.value = value">
+                <div id="demo"></div>
+            </label>
+            <label class="slidecontainer third" style="margin-bottom : 150px">
+                <span>statisticalhypothesistesting</span>
+                <output id="rangestatisticalhypothesistesting">0</output>
+                <input class="slider" name="statisticalhypothesistesting" id="statisticalhypothesistesting" type="range" min="0" step="1" max="100" value="0" onchange=" rangestatisticalhypothesistesting.value = value">
+                <div id="demo"></div>
+            </label>
+
+
+            <button type="submit" class="btn btn-outline-success">Success</button>
+        </form>
+    </main>
+
+</body>
+
+    {% endblock %}
+

@@ -1,0 +1,95 @@
+{% extends "base.html" %} {% block title %}Logs{% endblock %} {% block content
+%}
+
+<link rel="stylesheet" href="static/styles.css" />
+
+<p>Your marking {{mark_user}} answers</p>
+
+<h5>Make sure to mark fair!</h5>
+
+
+
+
+<!--Changing the image using a javascript function-->
+<centre>
+    <div class="pagination_section" style="margin-left:200px">
+        <a title="question 1" onclick="imagechange()" id="q1" value="1">1</a>
+        <a title="question 2" id="q2" onclick="imagechange()" value="2">2</a>
+        <a title="question 3" id="q3" onclick="imagechange()" value="3">3</a>
+        <a title="question 4" id="q4" onclick="imagechange()" value="4">4</a>
+        <a title="question 5" id="q5" onclick="imagechange()" value="5">5</a>
+    </div>
+</centre>
+
+
+
+<div>
+    <p>Once marked enter the mark recived for each question</p>
+    <label>q1</label>
+    <input type="text" id="q1" />
+    <label>q2</label>
+    <input type="text" id="q2" />
+    <label>q3</label>
+    <input type="text" id="q3" />
+    <label>q4</label>
+    <input type="text" id="q4" />
+    <label>q5</label>
+    <input type="text" id="q5" />
+    <input type="submit"  />
+</div>
+<br />
+
+
+ 
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+    function imagechange() {
+        var image_1 = document.getElementById('question_image')
+        this_value = this.value
+        if (this_value = 1) {
+            image_1.src = "static/marking/mark1.png";
+        }
+        else if (this_value = 2) {
+            image_1.src = "static/marking/mark2.png"
+        }
+        else if (this_value = 3) {
+            image_1.src = "static/marking/mark3.png"
+        }
+        else if (this_value = 4) {
+            image_1.src = "static/marking/mark4.png"
+        }
+        else if (this_value = 5) {
+            image_1.src = "static/marking/mark5.png"
+        }
+
+    }
+
+
+
+</script>
+
+
+<div>
+    <p>1</p>
+    <img src="static/marking/mark{{user.id}}0.png" alt="question 1" id="question_image" style="margin-left:200px">
+    <p>2</p>
+    <img src="static/marking/q{{user.id}}1-ans.png" alt="question 2" id="question_image" style="margin-left:200px">
+    <p>3</p>
+    <img src="static/marking/q{{user.id}}2-ans.png" alt="question 3" id="question_image" style="margin-left:200px">
+    <p>4</p>
+    <img src="static/marking/q{{user.id}}3-ans.png" alt="question 4" id="question_image" style="margin-left:200px">
+    <p>5</p>
+    <img src="static/marking/q{{user.id}}4-ans.png" alt="question 5" id="question_image" style="margin-left:200px">
+
+</div>
+
+
+
+<br />
+
+
+{% endblock %}

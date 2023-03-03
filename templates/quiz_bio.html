@@ -1,0 +1,114 @@
+{% extends "base.html" %} {% block title %}bio choice{% endblock %} {% block content
+%}
+
+<head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+
+
+        function populate(s1, s2) {
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+
+            if (s1.value == "1") {
+                var optionArray = ['|', "lipid|lipid", "carbohydrates|Carbohydrates", "proteinandenzymes|proteins and enzymes", "dna|dna", "atp|atp", "Waterandinorganic_ions|water"];
+            }
+            else if (s1.value == "2") {
+                var optionArray = ['|', "cellstructure|cell strucuture", "transportacrossmembrane|transport across membrane", "cellcycle|cell cycle", "immunesystem|immune system"];
+            }
+            else if (s1.value == "3") {
+                var optionArray = ['|', "gasexchange|gas exchange", "digestionandabsorption|digestion and absorption", "masstransport|mass transport"];
+            }
+            else if (s1.value == "4") {
+                var optionArray = ['|', "proteinsynthesis|protein synthesis", "biodiversity|biodiversity", "geneticdiversity|genetic diversity"];
+            }
+            else if (s1.value == "5") {
+                var optionArray = ['|', "photosynthesis|photosynthesis", "respiration|respiration", "nitrogencycle|nitrogen cycle", "energyandecosystem|energy and ecosystem"];
+            }
+            else if (s1.value == "6") {
+                var optionArray = ['|', "responsetostimuli|response to stimuli", "nervouscoordinationandmuscles|nervous coordination and muscles", "homeostasis|homeostasis"];
+            }
+            else if (s1.value == "7") {
+                var optionArray = ['|', "inheritedchange|inherited change", "populationandevolution|population and evolution", "populationinecosystems|population in ecosystems"];
+            }
+            else if (s1.value == "8") {
+                var optionArray = ['|', "geneexpression|gene expression", "recombinantDNAtechnology|recombinant DNA technology"];
+            }
+
+            for (var option in optionArray) {
+                var pair = optionArray[option].split("|");
+                var newOption = document.createElement("option");
+                newOption.value = pair[0];
+                newOption.innerHTML = pair[1];
+                s2.options.add(newOption);
+
+
+            }
+
+        }
+
+        document.getElementById("leave-button").onclick = function () {
+            location.href = "/questions";
+        };
+
+        document.getElementById("leave-button").addEventListener("click", function () {
+
+            // Send timeSpent to the server using an AJAX call
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/topicchoosen", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({ topic: slct2 }));
+            location.href = "/questions";
+            
+        });
+        
+
+    </script>
+</head>
+<link rel="stylesheet" href="static/styles.css" />
+<body>
+    <div>
+
+        <h1 class="hometitle">Welcome, <span class="name">{{name}}</span></h1>
+        <p>Answering question time :D</p>
+        <p>First you have to pick what topic questions do you want or do you want them from the all specification :D</p>
+    </div>
+    <hr />
+    <form method="POST"  >
+        choose topic:
+        <select id="slct1" name="slct1" onchange="populate(this.id,'slct2')">
+            <option value="">nothin</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+
+
+        </select>
+
+        <hr />
+        choose subtopic:
+        <select id="slct2" name="slct2">
+            <option value="">nothin</option>
+
+
+        </select>
+        <hr />
+        <button type="submit" class="button" id="leave-button">question time</button>
+        <a href="/questions">question time</a>
+    </form>
+</body>
+
+
+
+
+
+
+    {% endblock %}
+

@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block title %}Student Home{% endblock %} {% block content
+%}
+<link rel="stylesheet" href="static/styles.css" />
+
+<div>
+    <h5>Now you can either mark your answers yourself or send them to someone else to mark the choice is up to you</h5>
+    <hr />
+</div>
+
+<div>
+    <a class="btn btn-primary" href="/answer" role="button">Mark your own </a>
+    <a class="btn btn-primary" href="/uploadimage" role="button">Have someone mark</a>
+</div>
+
+  {% endblock %}

@@ -1,0 +1,677 @@
+<div class=" container">
+    <form>
+        <div class="form-group">
+            <label for="formControlRange">Lipids</label>
+            <input type="range" class="form-control-range" min="0" max="5" step="0.5" id="customRange3" align="center">
+        </div>
+        <div class="form-group">
+            <label for="formControlRange">Carbohydrates</label>
+            <input type="range" class="form-control-range" min="0" max="5" step="0.5" id="customRange3" align="center">
+        </div>
+        <div class="form-group">
+            <label for="formControlRange">Protein</label>
+            <input type="range" class="form-control-range" min="0" max="5" step="0.5" id="customRange3" align="center">
+        </div>
+        <div class="form-group">
+            <label for="formControlRange">DNA</label>
+            <input type="range" class="form-control-range" min="0" max="5" step="0.5" id="customRange3" align="center">
+        </div>
+        <div class="form-group">
+            <label for="formControlRange">Water and Inorganic ions</label>
+            <input type="range" class="form-control-range" min="0" max="5" step="0.5" id="customRange3" align="center">
+        </div>
+        <div class="form-group">
+            <label for="formControlRange">ATP</label>
+            <input type="range" class="form-control-range" min="0" max="5" step="0.5" id="customRange3" align="center">
+        </div>
+    </form>
+</div>
+
+
+<div class="container">
+    <h2>Range Sliders <small>Only tested in Chrome!</small></h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="range">
+                <input type="range" name="range" min="1" max="100" value="50" onchange="range.value=value">
+                <output id="range">50</output>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="range range-primary">
+                <input type="range" name="range" min="1" max="100" value="50" onchange="rangePrimary.value=value">
+                <output id="rangePrimary">50</output>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="range range-success">
+                <input type="range" name="range" min="1" max="100" value="50" onchange="rangeSuccess.value=value">
+                <output id="rangeSuccess">50</output>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="range range-info">
+                <input type="range" name="range" min="1" max="100" value="50" onchange="rangeInfo.value=value">
+                <output id="rangeInfo">50</output>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="range range-warning">
+                <input type="range" name="range" min="1" max="100" value="50" onchange="rangeWarning.value=value">
+                <output id="rangeWarning">50</output>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="range range-danger">
+                <input type="range" name="range" min="1" max="100" value="50" onchange="rangeDanger.value=value">
+                <output id="rangeDanger">50</output>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+-DATABASAE STUFF-
+
+import mysql.connector
+mydb = mysql.connector.connect(
+    host = "localhost",
+    user = "ram",
+    password = "Street4.",
+    database = "testdatabase"
+
+
+
+    )
+
+mycursor = mydb.cursor()
+
+
+
+#with open('questions/Bio.png', 'rb') as f:
+ #   m = f.read()
+  #  print(m)
+
+#name = "lipids"
+#topic = "lipids"
+
+#with open('questions/Lipid-1.PNG' , 'rb') as f:
+#    question = f.read()
+
+#with open('questions/Lipid-1-ans.PNG' , 'rb') as b:
+ #   answer = b.read()
+
+#cursor.execute("""INSERT INTO my_table (name,topic, question,answer) VALUES (?,?,?,?)""",(name,topic,question,answer))
+
+#sqlite stuff 
+#cursor.execute("""
+#CREATE TABLE my_table (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL , name TEXT, topic TEXT, question BLOB, answer BLOB)
+
+#""")
+
+#writing the question into the database
+
+with open('questions/biology/DNA-1.PNG' , 'rb') as f:
+    question = f.read()
+
+with open('questions/biology/DNA-1-ans.PNG','rb') as a:
+    ans = a.read()
+
+topic = "dna"
+cursor.execute("""
+INSERT INTO questions (topic,question,answer,marks) VALUES (?,?,?,?)""",(topic,question,ans,8))
+
+
+
+
+
+
+mycursor.execute("DESCRIBE People")
+for x in mycursor:
+    print(x)
+
+
+
+#code for sending an email
+-sending an email- 
+import smtplib
+import random
+from main import database
+
+#Login email detail and sending email detail
+my_email = "testingmycode1@outlook.com"
+password  = "Street4."
+send_email = "rameenather22@gmail.com"
+
+
+
+
+
+#initialize connection to our email server, we will use Outlook here
+def send_an_email(my_email,password,send_email,text):
+
+    """Sends an email"""
+
+    with smtplib.SMTP('smtp-mail.outlook.com', port='587') as smtp:
+        smtp.ehlo()  # send the extended hello to our server
+        smtp.starttls()  # tell server we want to communicate with TLS encryption
+        smtp.login(user = my_email, password = password)  # login to our email server
+        smtp.sendmail(from_addr =my_email,
+                      to_addrs = send_email,
+                      msg = f"""Subject:Email from maths/Biology \n\n {text}""") #The email message. 
+    print("email success")
+
+
+
+
+    <main class="wrapper">
+
+    <form class="all-sliders" method="post">
+        <label class="slidecontainer third">
+            <span>Lipid</span>
+            <output class="numoutput" id="range">100</output>
+            <input class="slider" name="lipids" id="lipids" type="range" min="1" step="1" max="100" value="100" onchange=" range.value = value">
+            <div id="demo"></div>
+        </label>
+        <label class="slidecontainer third">
+            <span>Protein</span>
+            <output id="rangeprotein">100</output>
+            <input class="slider" name="protein" id="protein" type="range" min="1" step="1" max="100" value="100" onchange=" rangeprotein.value = value">
+            <div id="demo"></div>
+        </label>
+        <label class="slidecontainer third">
+            <span>water</span>
+            <output id="rangewater">100</output>
+            <input class="slider" name="water" id="water" type="range" min="1" step="1" max="100" value="100" onchange=" rangewater.value = value">
+            <div id="demo"></div>
+        </label>
+        <label class="slidecontainer third ">
+            <span>atp</span>
+            <output id="rangeatp">100</output>
+            <input class="slider" name="atp" id="atp" type="range" min="1" step="1" max="100" value="100" onchange=" rangeatp.value = value">
+            <div id="demo"></div>
+        </label>
+        <label class="slidecontainer third ">
+            <span>Carbohydrates</span>
+            <output id="rangecarbohydrates">100</output>
+            <input class="slider" name="Carbohydrates" id="Carbohydrates" type="range" min="1" step="1" max="100" value="100" onchange=" rangecarbohydrates.value = value">
+            <div id="demo"></div>
+        </label>
+        <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+</main>
+
+
+
+tables_biology = {
+         '1': ['Lipids', 'Carbohydrates','Proteins and Enzymes','DNA ', 'ATP', 'Water and Inorgranic ions'],
+         '2': ['Cell structure','Transport across cell membranes','Cell cycle','Immune system'],
+         '3': ['Gas Exchange','Digestion and Absorption','Mass Transport'],
+         '4': ['Protein Synthesis','Biodiversity ','Genetic Diversity '],
+         '5': ['Photosynthesis','Respiration','Nitrogen Cycle','Energy and ecosystem'],
+         '6': ['Homeostasis','Nervous coordination and muscles','Response to stimuli',],
+         '7': ['Populations in ecosystems','Inheritance and genetic crosses','Evolution and Speciation'],
+         '8': ['Gene Mutation','Stem cells','Genetic Fingerprinting ','Gene Expression and Cancer']
+          }
+
+
+          m = cursor.fetchall()
+    type(result[0][0])
+#If the type is byte, use from io import BytesIOf. If str, use from io import StringIO.
+    file_like= BytesIO(result[0][0])
+    img=PIL.Image.open(file_like)
+    img.show()
+    with open("q1.png", "wb") as fh:
+        fh.write(base64.decodebytes(m))
+    print(type(m))
+    #image_2 = base64.decodebytes(m)
+    #w = open("q1.png", "w") 
+    #w.write(image_2)
+    #w.close()
+
+
+
+        function sendTime() {
+
+        totaltimmy = document.getElementById("test").value;
+        const dics_values = { totaltimmy }
+        const s = JSON.stringify(dics_values);
+        console.log(s);
+        $.ajax({
+            url: '/shit',
+            type: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify(s)
+
+        });
+    }
+
+
+
+    
+    def get_stats():
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+
+        user = current_user
+        current_date = date.today()
+        user_id = user.id
+
+        topic1 = cursor.execute (f"""
+            SELECT lipid, carbohydrates, protein_and_enzymes, dna, atp, Water_and_inorganic_ions
+            FROM topic1
+            WHERE account_id = ?
+            """,[user_id])
+         
+        topic2 = cursor.execute (f"""
+            SELECT cell_structure, transport_across_membrane ,cell_cycle, immune_system
+            FROM topic2
+            WHERE account_id = ?
+            """,[user_id])
+         
+        topic3 = cursor.execute (f"""
+            SELECT gas_exchange, digestion_and_absorption, mass_transport
+            FROM topic3
+            WHERE account_id = ?
+            """,[user_id])
+
+        topic4 = cursor.execute (f"""
+            SELECT protein_synthesis, biodiversity, genetic_diversity
+            FROM topic4
+            WHERE account_id = ?
+            """,[user_id])
+
+        topic5 = cursor.execute (f"""
+            SELECT photosynthesis, respiration, nitrogen_cycle, energy_and_ecosystem
+            FROM topic5
+            WHERE  account_id = ?
+            """,[user_id])
+
+        topic6 = cursor.execute (f"""
+            SELECT homeostasis,nervous_coordination_and_muscles, response_to_stimuli
+            FROM topic6
+            WHERE  account_id = ?
+            """,[user_id])
+
+        topic7 = cursor.execute (f"""
+            SELECT inherited_change, population_and_evolution, population_in_ecosystems
+            FROM topic7
+            WHERE  account_id = ?
+            """,[user_id])
+
+        topic8 = cursor.execute (f"""
+            SELECT gene_expression, recombinant_DNA_technology
+            FROM topic8
+            WHERE  account_id = ?
+            """,[user_id])
+
+        t1 = topic1.fetchall()
+        results1 = get_stats(t1)
+
+
+        t2 = topic2.fetchall()
+        results2 = get_stats(t2)
+
+        t3 = topic3.fetchall()
+        results3 = get_stats(t3)
+
+        t4 = topic4.fetchall()
+        results4 = get_stats(t4)
+
+        t5 = topic5.fetchall()
+        results5 = get_stats(t5)
+        t6 = topic6.fetchall()
+        results6 = get_stats(t6)
+        t7 = topic7.fetchall()
+        results7 = get_stats(t7)
+        t8 = topic8.fetchall()
+        results8 = get_stats(t8)
+
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+
+
+    def data_into_csv(self):
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+
+        user = current_user
+        current_date = date.today()
+        user_id = user.id
+
+        cursor.execute (f"""
+            SELECT lipid, carbohydrates, protein_and_enzymes, dna, atp, Water_and_inorganic_ions
+            FROM topic1
+            WHERE account_id = ?
+            """,[user_id])
+
+        m_dict = cursor.fetchall()
+
+        with open(f"static/user_stats/{user.id}topic1.csv", "w", newline='') as csv_file:  # Python 3 version    
+             # Python 2 version
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow([i[0] for i in cursor.description]) # write headers
+            csv_writer.writerows(m_dict)
+
+        conn.close()
+
+            def get_stats(self,t1):
+
+        temp = []
+
+        for row in t1:
+            for log in row:
+                temp[log] += log
+     
+
+        highest1 = None
+        for i in temp:
+            if temp[i+1] > temp[i]:
+                highest = temp[i+1]
+            else:
+                highest = temp[i]
+
+        temp2 = statistics.mean(temp)
+        temp3 = statistics.median(temp)
+        return (temp1,temp2,temp3)
+
+
+
+            def get_best_topic(self,logs):
+       """Calculating the best topic to study at the time might vhange """
+       temp = 0
+       optimal = None
+       temp_list = []
+       for i in range(5):
+           for j in range(len(self.logs[i+1])):
+               temp+=self.logs[i+1][j]
+               temp_list.append(temp/4)
+               temp = 0
+       optimal = higher(temp_list)
+       print(optimal)
+
+
+    def highest(hi):
+
+        highest = 0
+        index = 0
+        for i in range(1,len(hi)):
+            if hi[i] > hi[i-1]:
+                highest = hi[i]
+                index = i
+                print(highest)
+        else:
+           highest = hi[i-1]
+           index = i-1
+        return index
+
+
+
+        #put 6 questions for now, so i can code the stuff that the questions are needed for.
+topic = "geneticdiversity"
+mark = 15
+
+with open('questions/biology/gd-1.PNG' , 'rb') as f:
+    question1= f.read()
+
+with open('questions/biology/gd-1-ans.PNG','rb') as a:
+    ans1 = a.read()
+
+with open('questions/biology/gd-2.PNG' , 'rb') as b:
+    question2 = b.read()
+
+with open('questions/biology/gd-2-ans.PNG','rb') as c:
+    ans2 = c.read()
+
+with open('questions/biology/gd-3.PNG' , 'rb') as d:
+    question3 = d.read()
+
+with open('questions/biology/gd-3-ans.PNG','rb') as e:
+    ans3 = e.read()
+
+with open('questions/biology/gd-4.PNG' , 'rb') as g:
+    question4 = g.read()
+
+with open('questions/biology/gd-4-ans.PNG','rb') as h:
+    ans4 = h.read()
+
+with open('questions/biology/gd-5.PNG' , 'rb') as i:
+    question5 = i.read()
+
+with open('questions/biology/gd-5-ans.PNG','rb') as j:
+    ans5 = j.read()
+
+
+
+
+cursor.execute("""INSERT INTO questions (topic, question, answer, marks) VALUES (?,?,?,?)""",(topic,question1,ans1,7))
+conn.commit()
+cursor.execute("""INSERT INTO questions (topic, question, answer, marks) VALUES (?,?,?,?)""",(topic,question2,ans2,8))
+conn.commit()
+cursor.execute("""INSERT INTO questions (topic, question, answer, marks) VALUES (?,?,?,?)""",(topic,question3,ans3,15))
+conn.commit()
+cursor.execute("""INSERT INTO questions (topic, question, answer, marks) VALUES (?,?,?,?)""",(topic,question4,ans4,8))
+conn.commit()
+cursor.execute("""INSERT INTO questions (topic, question, answer, marks) VALUES (?,?,?,?)""",(topic,question5,ans5,8))
+
+tables_biology = {
+         '1': ['Lipids', 'Carbohydrates','Proteins and Enzymes','DNA ', 'ATP', 'Water and Inorgranic ions'],
+         '2': ['Cell structure','Transport across cell membranes','Cell cycle','Immune system'],
+         '3': ['Gas Exchange','Digestion and Absorption','Mass Transport'],
+         '4': ['Protein Synthesis','Biodiversity ','Genetic Diversity '],
+         '5': ['Photosynthesis','Respiration','Nitrogen Cycle','Energy and ecosystem'],
+         '6': ['Homeostasis','Nervous coordination and muscles','Response to stimuli',],
+         '7': ['Populations in ecosystems','Inheritance and genetic crosses','Evolution and Speciation'],
+         '8': ['Gene Mutation','Stem cells','Genetic Fingerprinting ','Gene Expression and Cancer']
+          }
+
+
+          socketio = SocketIO(app)
+
+@socketio.on('connect')
+def handle_connect():
+    # Save the user's connection in the list of connected users
+    connected_users[request.sid] = request.namespace
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    # Remove the user's connection from the list of connected users
+    del connected_users[request.sid]
+
+
+       def one_week(self):
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+
+        now = datetime.now()
+
+        date_week = now-timedelta(7)
+        #change
+        cursor.execute("""
+            SELECT question_done_id, acc_id, qa_id, marks, email, topic, first_name
+            FROM account_marks, user
+            WHERE account_marks.acc_id = user.id and account_marks.date_entered = ?"""[date_week])
+
+        with smtplib.SMTP('smtp-mail.outlook.com', port='587') as smtp:
+            smtp.ehlo()  # send the extended hello to our server
+            smtp.starttls()  # tell server we want to communicate with TLS encryption
+            smtp.login(user = my_email, password = password)  # login to our email server
+            smtp.sendmail(from_addr = my_email,
+                          to_addrs = send_email,
+                          #The email message.
+                          msg = f"""Subject:Email from maths/Biology revision \n\n {name} You did questions on {topic} a week ago try to attempt them again and see how you do """)  
+        print("email success")
+    
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+
+
+
+        @views.route('/call', methods=['GET', 'POST'])
+@login_required
+def call():
+    
+
+    
+    return render_template("fuck.html", user = current_user)
+
+@views.route('/testing', methods=['POST'])
+def test():
+    import os
+    from dotenv import load_dotenv
+    from flask import Flask, render_template, request, abort
+    from twilio.jwt.access_token import AccessToken
+    from twilio.jwt.access_token.grants import VideoGrant
+
+
+
+    load_dotenv()
+    twilio_account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
+    twilio_api_key_sid = os.environ.get('TWILIO_API_KEY_SID')
+    twilio_api_key_secret = os.environ.get('TWILIO_API_KEY_SECRET')
+
+    TWILIO_ACCOUNT_SID = "AC79f8996e6a9fa718d8b9a829ff4a6788"
+    TWILIO_API_KEY_SID = 'SKb051122900aab1d1d1bc409c30686115'
+    TWILIO_API_KEY_SECRET = 'GW8fHqPmb409YsNLdOC5JplxbQwfOu4t'
+
+    username = request.get_json(force=True).get('username')
+    if not username:
+        abort(401)
+
+    token = AccessToken(twilio_account_sid, twilio_api_key_sid,
+                        twilio_api_key_secret, identity=username)
+    token.add_grant(VideoGrant(room='My Room'))
+
+    return {'token': token.to_jwt().decode()}
+
+
+
+    @views.route('/topicchoosen', methods=['POST'])
+def topichoosen():
+    data = json.loads(request.data)
+    print(data)
+    topic = data["topic"]
+    print(topic)
+    return jsonify({"message": "time_spent stored in database"})
+
+
+
+@views.route('/testing', methods =['GET','POST'] )
+@login_required
+def testing():
+
+
+    return render_template('testing.html' , user = current_user)
+
+
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS topic1 (account_id INTEGER NOT NULL,
+    date_entered DATE PRIMARY KEY NOT NULL,
+    lipid INTEGER NOT NULL,
+    carbohydrates INTEGER NOT NULL,
+    protein_and_enzymes INTEGER NOT NULL,
+    DNA INTEGER NOT NULL,
+    ATP INTEGER NOT NULL,
+    Water_and_inorganic_ions INTEGER NOT NULL,
+    FOREIGN KEY(account_id)
+        REFERENCES user (id))
+    """)
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS topic2 (account_id INTEGER NOT NULL,
+    date_entered DATE PRIMARY KEY NOT NULL,
+    cell_structure INTEGER NOT NULL,
+    transport_across_membrane INTEGER NOT NULL,
+    cell_cycle INTEGER NOT NULL,
+    immune_system INTEGER NOT NULL,
+    FOREIGN KEY(account_id)
+        REFERENCES user (id))
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS topic3 (account_id INTEGER NOT NULL,
+    date_entered DATE PRIMARY KEY NOT NULL,
+    gas_exchange INTEGER NOT NULL,
+    digestion_and_absorption INTEGER NOT NULL,
+    mass_transport INTEGER NOT NULL, 
+    FOREIGN KEY(account_id)
+        REFERENCES user (id))
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS topic4 (account_id INTEGER NOT NULL,
+    date_entered DATE PRIMARY KEY NOT NULL,
+    protein_synthesis INTEGER NOT NULL,
+    biodiversity INTEGER NOT NULL,
+    genetic_diversity INTEGER NOT NULL, 
+    FOREIGN KEY(account_id)
+        REFERENCES user (id))
+    """)
+
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS topic5 (account_id INTEGER NOT NULL,
+    date_entered DATE PRIMARY KEY NOT NULL,
+    photosynthesis INTEGER NOT NULL,
+    respiration INTEGER NOT NULL,
+    nitrogen_cycle INTEGER NOT NULL,
+    energy_and_ecosystem INTEGER NOT NULL,
+    FOREIGN KEY(account_id)
+        REFERENCES user (id))
+    """)
+
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS topic6 (account_id INTEGER NOT NULL,
+    date_entered DATE PRIMARY KEY NOT NULL,
+    response_to_stimuli INTEGER NOT NULL,
+    nervous_coordination_and_muscles INTEGER NOT NULL,
+    homeostasis INTEGER NOT NULL,
+    FOREIGN KEY(account_id)
+        REFERENCES user (id))
+    """)
+
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS topic7 (account_id INTEGER NOT NULL,
+    date_entered DATE PRIMARY KEY NOT NULL,
+    inherited_change INTEGER NOT NULL,
+    population_and_evolution INTEGER NOT NULL,
+    population_in_ecosystems INTEGER NOT NULL,
+    FOREIGN KEY(account_id)
+        REFERENCES user (id))
+    """)
+
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS topic8 (account_id INTEGER NOT NULL,
+    date_entered DATE PRIMARY KEY NOT NULL,
+    gene_expression INTEGER NOT NULL,
+    recombinant_DNA_technology INTEGER NOT NULL,
+    FOREIGN KEY(account_id)
+        REFERENCES user (id))
+    """)
+
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS account_marks (question_done_id INTEGER PRIMARY KEY NOT NULL,
+    id_foreign INTEGER NOT NULL,
+    date_entered DATE NOT NULL,
+    acc_id INTEGER NOT NULL,
+    qa_id INTEGER NOT NULL,
+    marks INTEGER ,
+    FOREIGN KEY(acc_id)
+        REFERENCES user (id),
+    FOREIGN KEY (qa_id)
+        REFERENCES questions (id))""")

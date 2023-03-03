@@ -1,0 +1,153 @@
+{% extends "base.html" %} {% block title %}Student Home{% endblock %} {% block content
+%}
+<link rel="stylesheet" href="static/styles.css" />
+<div>
+    <p style=" margin-top: 16px; ">Answering question time :D. </p>
+    <p>These questions will be timed on how long you take, so make sure to not leave your device open with this page :D</p>
+    <br />
+    <p class="time" id="demo"></p>
+</div>
+
+
+<button type="submit" id="leave-button" onclick='run = false '>Finish</button>
+
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    var startTime = new Date();
+
+    // Add event listener to button to get end time when clicked
+    document.getElementById("leave-button").addEventListener("click", function(){
+        var endTime = new Date();
+        var timeSpent = (endTime - startTime) / 1000; // time spent in seconds
+
+        // Send timeSpent to the server using an AJAX call
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/store", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({time_spent: timeSpent}));
+    });
+    
+ 
+
+    function imagechange() {
+        fetch('/testingthis')
+            .then(response => response.json())
+            .then(data => {
+                const id = data.id;
+                console.log(id);
+            })
+        
+        var image_1 = document.getElementById('question_image')
+        this_value = this.value
+        if (this_value = 1) {
+            image_1.src = 'static/questions/q${id}0.png';
+        }
+        else if (this_value = 2) {
+            image_1.src = 'static/questions/q${id}1.png';
+        }
+        else if (this_value = 3) {
+            image_1.src = 'static/questions/q${id}2.png';
+        }
+        else if (this_value = 4) {
+            image_1.src = 'static/questions/q${id}3.png';
+        }
+        else if (this_value = 5) {
+            image_1.src = 'static/questions/q${id}4.png';
+        }
+
+    }
+
+    document.getElementById("leave-button").onclick = function () {
+        location.href = "/choice";
+    };
+
+
+    var currentTime_s = 0;
+    var currentTime_m = 0;
+    var currentTime_h = 0;
+    var totalTime = 0
+    var run = true;
+    var time = "time";
+
+
+
+
+
+    var x = setInterval(function () {
+        if (run == false) {
+            document.getElementById("test").innerHTML = "You took " + totalTime + " seconds";
+            document.getElementById("test").value = totaltime;
+            sendinfo()
+            return;
+        }
+        else {
+
+            currentTime_s = currentTime_s + 1;
+            totalTime = totalTime + 1;
+
+            if (currentTime_s == 60) {
+                currentTime_m = currentTime_m + 1;
+                currentTime_s = 0
+                if (currentTime_m == 60) {
+                    currentTime_h = currentTime_h + 1;
+                    currentTime_m = 0
+                }
+            }
+
+            // Display the result in the element with id="demo"
+            document.getElementById("demo").innerHTML = currentTime_h + "h "
+                + currentTime_m + "m " + currentTime_s + "s ";
+
+
+        };
+    }, 1000);
+
+
+   
+
+
+    
+    
+
+</script>
+<br />
+<p id="test"></p>
+<br />
+
+<p>{{user.id}}</p>
+<!--Changing the image using a javascript function-->
+<centre>
+    <div class="pagination_section" style="margin-left:100px">
+        <a title="question 1" onclick="imagechange()" id="q{{user.id}}0" value="1">1</a>
+        <a title="question 2" id="q{{user.id}}1" onclick="imagechange()" value="2">2</a>
+        <a title="question 3" id="q{{user.id}}2" onclick="imagechange()" value="3">3</a>
+        <a title="question 4" id="q{{user.id}}3" onclick="imagechange()" value="4">4</a>
+        <a title="question 5" id="q{{user.id}}4" onclick="imagechange()" value="5">5</a>
+    </div>
+</centre>
+
+
+
+<!-- the images of the questions will go here -->
+<div>
+    <p>1</p>
+    <img src="static/questions/q{{user.id}}0.png" alt="question 1" id="question_image" style="margin-left:100px">
+    <p>2</p>
+    <img src="static/questions/q{{user.id}}1.png" alt="question 2" id="question_image" style="margin-left:100px" >
+    <p>3</p>
+    <img src="static/questions/q{{user.id}}2.png" alt="question 3" id="question_image" style="margin-left:100px">
+    <p>4</p>
+    <img src="static/questions/q{{user.id}}3.png" alt="question 4" id="question_image" style="margin-left:100px">
+    <p>5</p>
+    <img src="static/questions/q{{user.id}}4.png" alt="question 5" id="question_image" style="margin-left:100px">
+</div>
+
+
+
+
+    {% endblock %}
+
